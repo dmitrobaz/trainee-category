@@ -1,6 +1,6 @@
 import React from 'react';
 
-import placeholder from "../assets/img/placeholder.png"
+import placeholder from "../../assets/img/placeholder.png"
 
 interface ICardProps {
     cardTitle: string,

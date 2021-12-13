@@ -1,0 +1,102 @@
+@import "./vars";
+
+.nav-icon {
+    fill: black;
+    height: convertToVw(20);
+    width: convertToVw(20);
+    @media screen and (min-width: $MAX_WIDTH) {
+        height: convertToPx(20);
+        width: convertToPx(20);
+    }
+    &-cart {
+        fill: black;
+        height: convertToVw(20);
+        width: convertToVw(20);
+        @media screen and (min-width: $MAX_WIDTH) {
+            height: convertToPx(20);
+            width: convertToPx(20);
+        }
+    }
+}
+
+.header {
+    @include container;
+    justify-content: flex-start;
+    background: cadetblue;
+    position: fixed;
+    z-index: 10;
+    @media screen and (min-width: $MAX_WIDTH) {
+    }
+    &-shadow {
+        box-shadow: 0px 12px 10px #0000001f;
+    }
+
+    &-top {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    &-avatar {
+        padding: 0 convertToVw(30);
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: 0 convertToPx(30);
+        }
+        &-img {
+            max-width: convertToVw(60);
+            padding: convertToVw(20) 0 convertToVw(20) 0;
+            @media screen and (min-width: $MAX_WIDTH) {
+                max-width: convertToPx(60);
+                padding: convertToPx(20) 0 convertToPx(20) 0;
+            }
+        }
+    }
+    &-social {
+        display: flex;
+        margin-bottom: convertToVw(5);
+        padding-top: convertToVw(5);
+        @media screen and (min-width: $MAX_WIDTH) {
+            margin-bottom: convertToPx(5);
+            padding-top: convertToPx(5);
+        }
+        &-link {
+            padding: convertToVw(5) convertToVw(10);
+            @media screen and (min-width: $MAX_WIDTH) {
+                padding: convertToPx(5) convertToPx(10);
+            }
+        }
+    }
+    &-title {
+        font-weight: bold;
+        text-align: left;
+        font-size: convertToVw(18);
+        opacity: 1;
+        transition: 0.2s ease-in;
+        height: convertToVw(32.01);
+        padding-left: convertToVw(11);
+        @media screen and (min-width: $MAX_WIDTH) {
+            height: convertToPx(32.01);
+            padding-left: convertToPx(11);
+        }
+
+        &-hidden {
+            opacity: 0;
+            height: convertToVw(32.01);
+            @media screen and (min-width: $MAX_WIDTH) {
+                height: convertToPx(32.01);
+            }
+        }
+        @media screen and (min-width: $MAX_WIDTH) {
+            font-size: convertToPx(18);
+        }
+    }
+    &-cart {
+        margin-left: convertToVw(40);
+        @media screen and (min-width: $MAX_WIDTH) {
+            margin-left: convertToPx(40);
+        }
+    }
+    &-section {
+    }
+}

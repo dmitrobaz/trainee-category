@@ -1,0 +1,48 @@
+@import "./vars";
+
+.category {
+    display: flex;
+    padding: convertToVw(15);
+    width: convertToVw(375);
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    @media screen and (min-width: $MAX_WIDTH) {
+        padding: convertToPx(15);
+        max-width: convertToPx(375);
+    }
+    &::after {
+        position: absolute;
+        content: "";
+        width: convertToVw(100);
+        height: convertToVw(31);
+        right: convertToVw(-1);
+        top: convertToVw(116);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #f3f3f3 100%);
+        pointer-events: none;
+
+        @media screen and (min-width: $MAX_WIDTH) {
+            width: convertToPx(100);
+            height: convertToPx(31);
+            top: convertToPx(116);
+            right: convertToPx(-1);
+        }
+    }
+    &-item {
+        padding: convertToVw(5) convertToVw(15);
+        font-size: convertToVw(15);
+        background: #e4e4e4;
+        margin-right: convertToVw(5);
+        transition: 0.2s ease-in;
+        cursor: pointer;
+        &:hover {
+            background: #5f9ea093;
+        }
+        @media screen and (min-width: $MAX_WIDTH) {
+            font-size: convertToPx(15);
+            padding: convertToPx(5) convertToPx(15);
+            margin-right: convertToPx(5);
+        }
+    }
+}

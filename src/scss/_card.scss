@@ -1,0 +1,57 @@
+@import "./vars";
+
+
+.card {
+    width: convertToVw(375);
+    @media screen and (min-width: $MAX_WIDTH) {
+        width: convertToPx(375);
+    }
+    &-wrapper {
+        padding: convertToVw(10);
+        margin: convertToVw(10) 0 convertToVw(10) convertToVw(13);
+        background: #ededed;
+        width: convertToVw(160);
+        cursor: pointer;
+        white-space: nowrap;
+        display: inline-block;
+        box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+        transition: 0.2s ease-in;
+        &:hover {
+            background: #dcdcdc;
+        }
+        @media screen and (min-width: $MAX_WIDTH) {
+            margin: convertToPx(10) 0 convertToPx(10) convertToPx(13);
+            box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+            padding: convertToPx(10);
+            width: convertToPx(160);
+        }
+    }
+    &-avatar {
+        &-img {
+            width: 100%;
+        }
+    }
+    &-title {
+        font-size: convertToVw(18);
+        @media screen and (min-width: $MAX_WIDTH) {
+            font-size: convertToPx(18);
+        }
+    }
+    &-category {
+        display: flex;
+        flex-wrap: wrap;
+
+        &-item {
+            padding: convertToVw(5);
+            background: #5f9ea047;
+            margin: convertToVw(5);
+            font-size: convertToVw(11);
+
+            @media screen and (min-width: $MAX_WIDTH) {
+                font-size: convertToPx(11);
+                padding: convertToPx(5);
+                margin: convertToPx(5);
+            }
+        }
+    }
+}

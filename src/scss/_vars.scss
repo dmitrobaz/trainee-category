@@ -1,0 +1,25 @@
+$MAX_WIDTH: 568px;
+$MIN_WIDTH: 375px;
+
+$BGC_HEADER: cadetblue;
+$BGC_MAIN: #f3f3f3;
+
+$BGC_CATEGORY_ITEM: red;
+
+@function convertToVw($fontSizePx) {
+    @return ($fontSizePx / 375) * 100 + vw;
+}
+@function convertToPx($size) {
+    @return $size / 375 * 568 + px;
+}
+
+@mixin container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: convertToVw(375);
+    margin: 0 auto;
+    @media screen and (min-width: $MAX_WIDTH) {
+        width: convertToPx(375);
+    }
+}
