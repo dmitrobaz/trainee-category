@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import Popup from './Popup';
-
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
-interface IPopupButtonProps {
+interface ITransitionProps {
   onShow?: () => void,
-  transitionIn?: boolean
+  transitionIn?: boolean,
+  children: any
 }
 
-const PopupButton: React.FC<IPopupButtonProps> = () => {
+const Transition: React.FC<ITransitionProps> = ({ children }) => {
   const transitionDuration = 500;
 
-  const ModalWithTransitionStyles = styled(Popup)`
+  const ModalWithTransitionStyles = styled(children)`
   &.modal-transition-enter {
     transform: translateX(100%);
   }
@@ -61,4 +60,4 @@ const PopupButton: React.FC<IPopupButtonProps> = () => {
   );
 };
 
-export default PopupButton;
+export default Transition;

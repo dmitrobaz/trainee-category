@@ -1,9 +1,213 @@
 @import "./vars";
 
+.popup-display-flex {
+    display: flex;
+}
+.no-margin {
+    margin: 0;
+}
+
 .popup {
     position: absolute;
     top: 0;
     z-index: 10;
     width: 100vw;
     background: white;
+    &-button {
+        position: absolute;
+        top: convertToVw(160);
+        right: convertToVw(15);
+    }
+    &-wrapper {
+        position: fixed;
+        // width: 100vw;
+        height: 100vh;
+        background: white;
+        z-index: 9999;
+        width: convertToVw(375);
+        @media screen and (min-width: $MAX_WIDTH) {
+            width: convertToPx(375);
+        }
+    }
+    &-header {
+        display: flex;
+        background: cadetblue;
+        font-size: 0.6875rem;
+        line-height: 1.2;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: white;
+        align-items: center;
+        height: convertToVw(50);
+    }
+    &-title {
+        width: 100%;
+        margin: 0;
+        font-size: convertToVw(18);
+        padding-left: convertToVw(20);
+        @media screen and (min-width: $MAX_WIDTH) {
+            font-size: convertToPx(18);
+            padding-left: convertToPx(20);
+        }
+        color: black;
+        text-transform: uppercase;
+    }
+    &-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        padding-left: convertToVw(20);
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding-left: convertToPx(20);
+        }
+        cursor: pointer;
+        svg {
+            width: convertToVw(20);
+            height: convertToVw(20);
+            @media screen and (min-width: $MAX_WIDTH) {
+                width: convertToPx(20);
+                height: convertToPx(20);
+            }
+            fill: black;
+        }
+    }
+    &-section {
+        padding: convertToVw(10) convertToVw(20);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        &::after {
+            background-color: #ededed;
+            position: absolute;
+            width: 100vw;
+            top: 0px;
+            height: convertToVw(62);
+            display: block;
+            content: "";
+            left: 0;
+            z-index: -1;
+        }
+        &-title {
+            font-size: convertToVw(18);
+            padding: convertToVw(10);
+        }
+        &-items {
+            &-edit {
+                flex-direction: column;
+
+                &-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: convertToVw(10);
+                }
+            }
+            &-wrapper {
+                display: flex;
+                margin-top: convertToVw(20);
+                flex-wrap: wrap;
+            }
+        }
+    }
+}
+@media screen and (min-width: $MAX_WIDTH) {
+    .popup {
+        position: absolute;
+        top: 0;
+        z-index: 10;
+        width: 100vw;
+        background: white;
+        &-button {
+            position: absolute;
+            top: convertToPx(160);
+            right: convertToPx(15);
+        }
+        &-wrapper {
+            position: fixed;
+            // width: 100vw;
+            height: 100vh;
+            background: white;
+            z-index: 9999;
+            width: convertToPx(375);
+            @media screen and (min-width: $MAX_WIDTH) {
+                width: convertToPx(375);
+            }
+        }
+        &-header {
+            display: flex;
+            background: cadetblue;
+            font-size: 0.6875rem;
+            line-height: 1.2;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+            align-items: center;
+            height: convertToPx(50);
+        }
+        &-title {
+            width: 100%;
+            margin: 0;
+            font-size: convertToPx(18);
+            padding-left: convertToPx(20);
+            @media screen and (min-width: $MAX_WIDTH) {
+                font-size: convertToPx(18);
+                padding-left: convertToPx(20);
+            }
+            color: black;
+            text-transform: uppercase;
+        }
+        &-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            padding-left: convertToPx(20);
+            @media screen and (min-width: $MAX_WIDTH) {
+                padding-left: convertToPx(20);
+            }
+            cursor: pointer;
+            svg {
+                width: convertToPx(20);
+                height: convertToPx(20);
+                @media screen and (min-width: $MAX_WIDTH) {
+                    width: convertToPx(20);
+                    height: convertToPx(20);
+                }
+                fill: black;
+            }
+        }
+        &-section {
+            padding: convertToPx(10) convertToPx(20);
+            &::after {
+                height: convertToPx(62);
+            }
+            &-title {
+                background-color: #ededed;
+                font-size: convertToPx(18);
+                padding: convertToPx(10);
+            }
+            &-items {
+                &-edit {
+                    flex-direction: column;
+                    &-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-top: convertToPx(10);
+                    }
+                }
+                &-wrapper {
+                    display: flex;
+                    margin-top: convertToPx(20);
+                    flex-wrap: wrap;
+                }
+            }
+        }
+    }
 }

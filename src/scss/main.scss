@@ -4,6 +4,25 @@
 @import "./category";
 @import "./popup";
 
+.test {
+    background: red;
+    transition: 0.2s ease-in;
+    opacity: 1;
+}
+
+.entering {
+    opacity: 1;
+}
+.entered {
+    opacity: 1;
+}
+.exiting {
+    opacity: 0;
+}
+.exited {
+    opacity: 0;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -28,8 +47,34 @@ a {
 
 #root {
     max-width: 568px;
-    margin: 0 auto;
     background: cadetblue;
+}
+
+.overflow-x-enable {
+    overflow-x: auto;
+}
+.overflow-x-disable {
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    &::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+    &::after {
+        @media screen and (min-width: $MAX_WIDTH) {
+            content: "";
+            height: 100vh;
+            width: calc(50vw - 285px);
+            background-color: white;
+            z-index: 9999;
+            position: absolute;
+            right: 0;
+        }
+    }
 }
 
 .main {

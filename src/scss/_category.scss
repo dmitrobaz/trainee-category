@@ -5,6 +5,123 @@
     padding: convertToVw(15);
     width: convertToVw(375);
     overflow: auto;
+    @media screen and (min-width: $MAX_WIDTH) {
+        .category {
+            width: convertToPx(375);
+            padding: convertToPx(15);
+            &-button {
+                padding: convertToPx(5);
+                font-size: convertToPx(14);
+            }
+            &-search {
+                padding: convertToPx(5);
+            }
+        }
+    }
+    &-edit {
+        &-wrapper {
+            display: flex;
+            left: 140px;
+            top: 65px;
+            margin-bottom: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &-button {
+        border: none;
+        padding: convertToVw(5);
+        background: #5f9ea054;
+        font-size: convertToVw(14);
+        cursor: pointer;
+        transition: 0.2s ease-in;
+        margin-left: 10px;
+
+        &:hover {
+            background: #5f9ea093;
+        }
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: convertToPx(5);
+            font-size: convertToPx(14);
+        }
+    }
+    &-search {
+        border: none;
+        font-size: convertToVw(14);
+        padding: convertToVw(5);
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: convertToPx(5);
+            font-size: convertToPx(14);
+        }
+    }
+    &-add {
+        border: 1px solid $BORDER_INPUT_COLOR;
+        font-size: convertToVw(14);
+        padding: convertToVw(5);
+        margin: convertToVw(15) 0;
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: convertToPx(5);
+            font-size: convertToPx(14);
+            margin: convertToPx(15) 0;
+        }
+    }
+    &-fixed {
+        position: fixed;
+        top: convertToVw(102);
+        z-index: 3;
+        background-color: #f3f3f3;
+        box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+        @media screen and (min-width: $MAX_WIDTH) {
+            top: convertToPx(102);
+            box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+        }
+    }
+    &-wrapper {
+        display: flex;
+        justify-content: space-between;
+        width: convertToVw(375);
+        padding: convertToVw(11);
+        font-size: 12px;
+        align-items: center;
+        transition: 0.2s ease-in;
+        &.entering {
+            opacity: 1;
+        }
+        &.entered {
+            opacity: 1;
+            position: fixed;
+            top: convertToVw(102);
+            z-index: 3;
+            background-color: #ededed;
+            box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+            @media screen and (min-width: $MAX_WIDTH) {
+                top: convertToPx(102);
+                box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+            }
+        }
+        &.exiting {
+            opacity: 1;
+        }
+        &.exited {
+            opacity: 1;
+        }
+
+        @media screen and (min-width: $MAX_WIDTH) {
+            width: convertToPx(375);
+            padding: convertToPx(11);
+        }
+        &-fixed {
+            position: fixed;
+            top: convertToVw(102);
+            z-index: 3;
+            background-color: #ededed;
+            box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+            @media screen and (min-width: $MAX_WIDTH) {
+                top: convertToPx(102);
+                box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+            }
+        }
+    }
     &::-webkit-scrollbar {
         width: 0;
     }
@@ -18,14 +135,14 @@
         width: convertToVw(100);
         height: convertToVw(31);
         right: convertToVw(-1);
-        top: convertToVw(116);
+        top: convertToVw(120);
         background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #f3f3f3 100%);
         pointer-events: none;
 
         @media screen and (min-width: $MAX_WIDTH) {
             width: convertToPx(100);
             height: convertToPx(31);
-            top: convertToPx(116);
+            top: convertToPx(120);
             right: convertToPx(-1);
         }
     }
@@ -33,7 +150,7 @@
         padding: convertToVw(5) convertToVw(15);
         font-size: convertToVw(15);
         background: #e4e4e4;
-        margin-right: convertToVw(5);
+        margin: convertToVw(5);
         transition: 0.2s ease-in;
         cursor: pointer;
         &:hover {
@@ -42,7 +159,7 @@
         @media screen and (min-width: $MAX_WIDTH) {
             font-size: convertToPx(15);
             padding: convertToPx(5) convertToPx(15);
-            margin-right: convertToPx(5);
+            margin: convertToPx(5);
         }
     }
 }

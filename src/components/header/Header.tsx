@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { AiFillFacebook, AiFillGithub, AiFillInstagram, AiFillLinkedin, AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaShoppingCart } from 'react-icons/fa';
+import { Transition } from 'react-transition-group';
 
 import avatar from "../../assets/img/avatar.png"
 
@@ -20,7 +21,7 @@ const Header = () => {
 
     return (
         <>
-            < header className={view ? "header header-shadow" : "header "}  >
+            < header className="header" >
                 <p className="header-avatar">
                     <img src={avatar} alt="Avatar img" className="header-avatar-img" />
                 </p>
@@ -33,7 +34,12 @@ const Header = () => {
 
                         <li><a className="header-cart" href="#cart"><FaShoppingCart className='nav-icon-cart' /></a></li>
                     </ul>
-                    <p className={view ? "header-title" : "header-title-hidden"}>Name Surname</p>
+                    <Transition
+                        in={view}
+                        timeout={1000}>
+                        {state => <p className={`header-title ${state}`}>Name Surname</p>}
+                    </Transition>
+
                 </section>
             </header >
         </>

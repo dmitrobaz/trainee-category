@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useEffect, useState, createContext } from "react";
 
-import { Categories, Header, CardGrid, PopupButton } from '../components';
+import { Categories, Header, CardGrid } from '../components';
 
-import { cardConfig, categoryConfig } from "../config/config";
+import { cardConfig, categoryConfig } from "../config";
+
+import * as utils from "../utils"
 
 import '../scss/main.scss';
 
+export interface iCategoryContext {
+    category: any;
+    setCategory: React.Dispatch<React.SetStateAction<any>>;
+}
+
+export const CategoryContext = createContext<iCategoryContext>({
+    category: [],
+    setCategory: () => { },
+});
+
+
 const Main = () => {
+    const categoryLocal = utils.jsonParse(localStorage.getItem('category')) ? utils.jsonParse(localStorage.getItem('category')) : categoryConfig
+    const [category, setCategory] = useState<any>(categoryLocal)
+
+
+    useEffect(() => {
+        console.log('Set category config to local storage')
+        setCategory(categoryLocal)
+        if (!categoryLocal) {
+            localStorage.setItem('category', JSON.stringify(categoryConfig))
+        }
+    }, [])
+
     return (
         <>
             <Header />
@@ -17,8 +42,9 @@ const Main = () => {
                         Minus pariatur aspernatur vitae commodi perferendis explicabo optio!
                     </p>
                 </section>
-                <PopupButton />
-                <Categories categoryConfig={categoryConfig} />
+                <CategoryContext.Provider value={{ category: category, setCategory: setCategory }}>
+                    <Categories />
+                </CategoryContext.Provider>
                 <CardGrid cardConfig={cardConfig} />
             </main>
         </>
