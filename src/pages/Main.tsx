@@ -1,12 +1,14 @@
 import React, { useEffect, useState, createContext } from "react";
 
-import { Categories, Header, CardGrid } from '../components';
+import { Categories, Header, CardColumns } from '../components';
 
 import { cardConfig, categoryConfig } from "../config";
 
 import * as utils from "../utils"
 
 import '../scss/main.scss';
+import { useDispatch } from "react-redux";
+import { setDefaultCategory } from "../store/actions/app/config/setDefaultCategory";
 
 export interface iCategoryContext {
     category: any;
@@ -21,7 +23,14 @@ export const CategoryContext = createContext<iCategoryContext>({
 
 const Main = () => {
     const categoryLocal = utils.jsonParse(localStorage.getItem('category')) ? utils.jsonParse(localStorage.getItem('category')) : categoryConfig
+
     const [category, setCategory] = useState<any>(categoryLocal)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(setDefaultCategory())
+    }, [])
 
 
     useEffect(() => {
@@ -42,10 +51,12 @@ const Main = () => {
                         Minus pariatur aspernatur vitae commodi perferendis explicabo optio!
                     </p>
                 </section>
+
                 <CategoryContext.Provider value={{ category: category, setCategory: setCategory }}>
                     <Categories />
                 </CategoryContext.Provider>
-                <CardGrid cardConfig={cardConfig} />
+
+                <CardColumns />
             </main>
         </>
     );

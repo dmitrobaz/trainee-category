@@ -11,17 +11,6 @@
     opacity: 1;
 }
 
-.flex-column {
-    width: convertToVw(178);
-    text-align: center;
-    @media screen and (min-width: $MAX_WIDTH) {
-        width: convertToPx(178);
-    }
-}
-.flex {
-    display: flex;
-}
-
 * {
     padding: 0;
     margin: 0;

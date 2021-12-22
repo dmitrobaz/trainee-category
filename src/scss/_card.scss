@@ -11,6 +11,16 @@
     @media screen and (min-width: $MAX_WIDTH) {
         width: convertToPx(375);
     }
+    &-column {
+        width: convertToVw(178);
+        text-align: center;
+        @media screen and (min-width: $MAX_WIDTH) {
+            width: convertToPx(178);
+        }
+        &-wrapper {
+            display: flex;
+        }
+    }
     &-wrapper {
         padding: convertToVw(10);
         margin: convertToVw(10) 0;

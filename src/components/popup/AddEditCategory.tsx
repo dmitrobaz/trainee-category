@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { AiFillEdit } from 'react-icons/ai';
 import { GoCheck, GoX } from 'react-icons/go';
+import { useDispatch } from 'react-redux';
 
 
 import { CategoryContext } from "../../pages/Main"
+import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 
 
 interface IAddEditCategoryProps {
@@ -22,6 +24,8 @@ interface IAddEditCategoryProps {
 const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, isAdd, setIsAdd, newCategory, setNewCategory, config, setConfig }) => {
     const [inputValue, setInputValue] = useState<string>()
     const categoryObj = useContext(CategoryContext)
+
+    const dispatch = useDispatch()
     // console.log("categoryObj.category", categoryObj.category);
 
     const bounced = (func: any, timer: any) => {
@@ -45,8 +49,9 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
         localStorage.setItem('category', JSON.stringify(categoryObj.category))
     }, [categoryObj.category])
 
-    const addNewCategory = () => {
-        categoryObj.setCategory((prev: any) => [...prev, { id: prev.length + 1, name: inputValue }])
+    const addNewCategoryHandler = () => {
+        // categoryObj.setCategory((prev: any) => [...prev, { id: prev.length + 1, name: inputValue }])
+        inputValue && dispatch(addNewCategory(inputValue))
     }
 
     return (
@@ -85,7 +90,7 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
                         onChange={(e: any) => onChangeHandler(e)} />
                     <button
                         className='category-button no-margin'
-                        onClick={() => addNewCategory()}>
+                        onClick={() => addNewCategoryHandler()}>
                         Add
                     </button>
                 </> : ''}

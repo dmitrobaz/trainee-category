@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { categoryConfig } from "../../config";
 
 import { AddEditCategory, CategoryItems, PopupHeader } from '..';
+import { useSelector } from 'react-redux';
 
 interface IPopupProps {
   showCloseIcon?: any,
@@ -16,11 +17,16 @@ interface IPopupProps {
 
 const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, className }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [config, setConfig] = useState<any>(categoryConfig)
   const [isAdd, setIsAdd] = useState<boolean>(false)
   const [newCategory, setNewCategory] = useState<any>()
 
-  const changeConfigHandler = (newConfig: any) => setConfig(newConfig)
+  const configCategory = useSelector(({ app }: any) => app.config.category)
+
+  const changeConfigHandler = () => {
+    console.log('changeConfigHandler');
+
+  }
+
 
 
 
@@ -39,12 +45,12 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, classNam
           setIsAdd={setIsAdd}
           newCategory={newCategory}
           setNewCategory={setNewCategory}
-          config={config}
+          config={configCategory}
           setConfig={changeConfigHandler}
         />
 
         <CategoryItems
-          category={config}
+          category={configCategory}
           changeConfig={changeConfigHandler}
           isEdit={isEdit}
           className='popup-section-items-wrapper'

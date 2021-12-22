@@ -1,1 +1,1 @@
-export { setAuthenticated } from "./setAuthenticated";
+export { togglePopup } from './togglePopup';

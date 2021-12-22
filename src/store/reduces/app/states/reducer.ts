@@ -1,11 +1,15 @@
-import { initState } from "."
-import { user } from "../../../types"
+import { initState } from ".";
+import { states as statesTypes } from "../../../types";
 
 
-export const states = (state = initState, action: any) => {
+
+export const states = (state: any = initState, action: any) => {
     switch (action.type) {
-        case user.SET_AUTHENTICATED:
-            return { isAuthenticated: action.payload }
+        case statesTypes.TOGGLE_POPUP: {
+            return { popup: !state.popup }
+        }
+
         default: return state
     }
 }
+

@@ -5,13 +5,14 @@ import Main from './pages/Main';
 import Test from './pages/Test';
 
 
-const App: React.FC = () => {
+const Route: React.FC = () => {
     return (
         <>
-            <ReactRoute path="/" component={Main} exact />
-            <ReactRoute path="/test" component={Test} exact />
+            <Main />
+            {/* <ReactRoute path="/" component={Main} exact />
+            <ReactRoute path="/test" component={Test} exact /> */}
         </>
     );
 };
 
-export default App;
+export default Route;

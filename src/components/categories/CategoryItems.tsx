@@ -6,6 +6,7 @@ import { CSSTransition, Transition } from 'react-transition-group';
 import { PopupCategoryItem } from '..';
 
 import { CategoryContext } from "../../pages/Main"
+import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 import { categoryAllSelected } from '../../store/actions/app/filter/categoryAllSelected';
 import { categoryUnselected } from '../../store/actions/app/filter/categoryUnselected';
 
@@ -18,17 +19,18 @@ interface ICategoryItemsProps {
 }
 
 const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => {
-    const dispatch = useDispatch()
-
-    const categoryObj = useContext(CategoryContext)
-
-    const [isEditName, setIsEditName] = useState<boolean>(false)
     const [isAdd, setIsAdd] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>()
 
+    const dispatch = useDispatch()
+    const selectedCards = useSelector(({ app }: any) => app.filter.category)
+    const categoryObj = useSelector(({ app }: any) => app.config.category)
 
-    const addNewCategory = () => {
-        categoryObj.setCategory((prev: any) => [...prev, { id: prev.length + 1, name: inputValue }])
+    const isSelectedAllCards = selectedCards.length === 0 || selectedCards[0] === 0
+
+    const addNewCategoryHandler = () => {
+        inputValue && dispatch(addNewCategory(inputValue))
+        // categoryObj.setCategory((prev: any) => [...prev, { id: prev.length + 1, name: inputValue }])
     }
 
     const onChangeHandler = (e: any) => {
@@ -56,7 +58,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
                     onClick={() => isEdit
                         ? setIsAdd(!isAdd)
                         : selectAllCategoryHandler()}
-                    className={`popup-category-item popup-category-item-all ${isEdit ? 'background-green' : ''}`}>
+                    className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''}`}>
                     {isEdit ? <GoPlus /> : "All"}
                 </button>
                 : <div><input
@@ -67,7 +69,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
                     onChange={(e: any) => onChangeHandler(e)} />
                     <button
                         className='category-button'
-                        onClick={() => addNewCategory()}>
+                        onClick={() => addNewCategoryHandler()}>
                         <GoCheck />
                     </button>
                     <button
@@ -76,7 +78,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
                         <GoX />
                     </button>
                 </div>}
-            {categoryObj.category.map((item: any, key: number) => <PopupCategoryItem key={`${key + item.name}`} categoryData={item} isEditable={isEdit} />)}
+            {categoryObj.map((item: any, key: number) => <PopupCategoryItem key={`${key + item.name}`} categoryData={item} isEditable={isEdit} />)}
         </ul >
 
     );

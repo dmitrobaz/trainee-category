@@ -17,8 +17,6 @@ const Header = () => {
         document.addEventListener('scroll', scrollFun)
     }, [])
 
-
-
     return (
         <>
             < header className="header" >

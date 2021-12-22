@@ -1,3 +1,3 @@
 export const initState = {
-    popup: false
+    category: []
 }
