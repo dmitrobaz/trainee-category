@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import { AiFillEdit } from 'react-icons/ai';
+import { GoCheck, GoX } from 'react-icons/go';
+
+
 import { CategoryContext } from "../../pages/Main"
 
 
@@ -18,7 +22,7 @@ interface IAddEditCategoryProps {
 const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, isAdd, setIsAdd, newCategory, setNewCategory, config, setConfig }) => {
     const [inputValue, setInputValue] = useState<string>()
     const categoryObj = useContext(CategoryContext)
-    console.log("categoryObj.category", categoryObj.category);
+    // console.log("categoryObj.category", categoryObj.category);
 
     const bounced = (func: any, timer: any) => {
         let timeId: any = null;
@@ -55,7 +59,7 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
                     <button
                         className='category-button'
                         onClick={() => setIsEdit(!isEdit)}>
-                        {!isEdit ? 'Edit' : 'Save'}
+                        {!isEdit ? <AiFillEdit /> : <GoCheck />}
                     </button>
 
                     {isEdit
@@ -63,8 +67,8 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
                         ?
                         <button
                             className='category-button'
-                            onClick={() => setIsAdd(!isAdd)}>
-                            {isAdd ? 'Close' : 'Add new category'}
+                            onClick={() => setIsEdit(!isEdit)}>
+                            {isAdd ? 'Close' : <GoX />}
                         </button>
                         : ''
                     }

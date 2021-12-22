@@ -6,6 +6,9 @@
 .no-margin {
     margin: 0;
 }
+.background-green {
+    background: $BGC_GREEN_HOVER !important;
+}
 
 .popup {
     position: absolute;
@@ -13,6 +16,65 @@
     z-index: 10;
     width: 100vw;
     background: white;
+    &-add {
+        &-wrapper {
+        }
+        &-input {
+            font-size: convertToVw(14);
+            padding: convertToVw(5);
+            width: convertToVw(140);
+            @media screen and (min-width: $MAX_WIDTH) {
+                padding: convertToPx(5);
+                font-size: convertToPx(14);
+                width: convertToPx(140);
+            }
+        }
+    }
+
+    &-category-item {
+        border: none;
+        padding: convertToVw(5) convertToVw(15);
+        font-size: convertToVw(15);
+        background: #e4e4e4;
+        margin: convertToVw(5);
+        transition: 0.2s ease-in;
+        cursor: pointer;
+        &-all {
+            width: convertToVw(50);
+        }
+        &-edit {
+            opacity: 0;
+            transition: 0.2s ease-in;
+            position: absolute;
+            left: 70%;
+        }
+        &-delete {
+            opacity: 0;
+            transition: 0.2s ease-in;
+            position: absolute;
+            left: 82%;
+        }
+        &-wrapper {
+            position: relative;
+
+            &:hover {
+                .popup-category-item-edit {
+                    opacity: 1;
+                }
+                .popup-category-item-delete {
+                    opacity: 1;
+                }
+            }
+        }
+        &:hover {
+            background: #5f9ea093;
+        }
+        @media screen and (min-width: $MAX_WIDTH) {
+            font-size: convertToPx(15);
+            padding: convertToPx(5) convertToPx(15);
+            margin: convertToPx(5);
+        }
+    }
     &-button {
         position: absolute;
         top: convertToVw(160);
@@ -109,6 +171,7 @@
                 display: flex;
                 margin-top: convertToVw(20);
                 flex-wrap: wrap;
+                align-items: center;
             }
         }
     }

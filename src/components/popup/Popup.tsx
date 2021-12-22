@@ -7,15 +7,14 @@ import { AddEditCategory, CategoryItems, PopupHeader } from '..';
 
 interface IPopupProps {
   showCloseIcon?: any,
-  onClose?: any,
-  title?: any,
+  onToggle?: any,
+  title: string,
   children?: any,
   className?: any,
   open?: any,
-  onSave?: any
 }
 
-const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onClose, title, className }) => {
+const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, className }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [config, setConfig] = useState<any>(categoryConfig)
   const [isAdd, setIsAdd] = useState<boolean>(false)
@@ -23,13 +22,13 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onClose, title, className
 
   const changeConfigHandler = (newConfig: any) => setConfig(newConfig)
 
-  
+
 
   const modalMarkup = (
     <section className={`${className} popup-wrapper ${showCloseIcon && 'overflow-x-enable'}`}>
       <PopupHeader
-        onClose={onClose}
-        title={title}
+        onClosePopup={onToggle}
+        titleHeaderPopup={title}
         showCloseIcon={showCloseIcon}
       />
       <section className='popup-section'>
@@ -47,11 +46,8 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onClose, title, className
         <CategoryItems
           category={config}
           changeConfig={changeConfigHandler}
-          edit={isEdit}
-          className={isEdit
-            ? 'popup-section-items-wrapper popup-section-items-edit'
-            : 'popup-section-items-wrapper'
-          }
+          isEdit={isEdit}
+          className='popup-section-items-wrapper'
         />
       </section>
     </section >

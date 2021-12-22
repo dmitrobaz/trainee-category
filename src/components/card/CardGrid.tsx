@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import StackGrid from 'react-stack-grid';
+import { useSelector } from 'react-redux';
 
 import { Card } from '../../components';
+
+import { categoryConfig } from '../../config';
+
 
 interface ICardGridProps {
     cardConfig: {
@@ -10,21 +13,40 @@ interface ICardGridProps {
 }
 
 const CardGrid: React.FC<ICardGridProps> = ({ cardConfig }) => {
-    const [view, setView] = useState<boolean>(false)
+    const selectedCategory = useSelector(({ app }: any) => app.filter.category)
 
-    // const scrollFun = (event: any) => {
-    //     if (window.scrollY > 100) setView(true)
-    //     if (window.scrollY < 100) setView(false)
+    const getCategoryNamesById = (arr: any) => {
+        return categoryConfig.filter((item: any) => arr.some((id: any) => id === item.id));
+    };
 
-    // }
-    // useEffect(() => {
-    //     document.addEventListener('scroll', scrollFun)
-    // }, [])
+    const allCards = cardConfig.map((item: any, key: number) => <Card key={key} cardTitle={item.name} cardCategory={getCategoryNamesById(item.categoryId)} />)
+    
+    const filteredCards = cardConfig.filter((item: any) => {
+        return item.categoryId.some((id: number) => selectedCategory.includes(id))
+    }).map((item: any, key: number) => <Card key={key} cardTitle={item.name} cardCategory={getCategoryNamesById(item.categoryId)} />)
+
+    const divisionIntoColumns = (arr: any[]) => {
+        const columnsize = Math.ceil(arr.length / 2)
+        let result = []
+        for (let i = 0; i < Math.ceil(arr.length / columnsize); i++) {
+            result[i] = arr.slice((i * columnsize), (i * columnsize) + columnsize);
+        }
+        return result
+    }
+
     return (
-        <StackGrid columnWidth='50%' itemComponent='li' component='ul' gutterWidth={1} className={view ? "card card-margint" : 'card'}>
-            {cardConfig.map((item, index: any) =>
-                <Card key={index} cardTitle={item.name} cardCategory={item.category} />)}
-        </StackGrid>
+        <>
+            {selectedCategory.includes(0) || selectedCategory.length === 0
+                ?
+                <section className='flex'>
+                    <ul className='flex-column'>{divisionIntoColumns(allCards)[0]}</ul>
+                    <ul className='flex-column'>{divisionIntoColumns(allCards)[1]}</ul>
+                </section>
+                : <section className='flex'>
+                    <ul className='flex-column'>{divisionIntoColumns(filteredCards)[0]}</ul>
+                    <ul className='flex-column'>{divisionIntoColumns(filteredCards)[1]}</ul>
+                </section>}
+        </>
     );
 };
 

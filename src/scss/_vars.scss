@@ -2,10 +2,14 @@ $MAX_WIDTH: 568px;
 $MIN_WIDTH: 375px;
 
 $BGC_HEADER: cadetblue;
+$BGC_GREEN_HOVER: #5f9ea093;
+
 $BGC_MAIN: #f3f3f3;
 $BORDER_INPUT_COLOR: #8080806b;
 
 $BGC_CATEGORY_ITEM: red;
+
+$POPUP_TRANSITION: 500ms;
 
 @function convertToVw($fontSizePx) {
     @return ($fontSizePx / 375) * 100 + vw;

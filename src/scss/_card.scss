@@ -13,7 +13,7 @@
     }
     &-wrapper {
         padding: convertToVw(10);
-        margin: convertToVw(10) 0 convertToVw(10) convertToVw(13);
+        margin: convertToVw(10) 0;
         background: #ededed;
         width: convertToVw(160);
         cursor: pointer;
@@ -25,7 +25,7 @@
             background: #dcdcdc;
         }
         @media screen and (min-width: $MAX_WIDTH) {
-            margin: convertToPx(10) 0 convertToPx(10) convertToPx(13);
+            margin: convertToPx(10) 0;
             box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
             padding: convertToPx(10);
             width: convertToPx(160);

@@ -31,7 +31,7 @@ const Categories: React.FC<ICategoriesProps> = ({ categoryConfig }) => {
     return (
         <>
             {categoryLength < 10
-                ? <CategoryItems category={categoryObj.category} className={view ? 'category category-fixed' : 'category'} edit={false} />
+                ? <CategoryItems category={categoryObj.category} className={view ? 'category category-fixed' : 'category'} isEdit={false} />
                 : <Transition
                     in={view}
                     timeout={0}>

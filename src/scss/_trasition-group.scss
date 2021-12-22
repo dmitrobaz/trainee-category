@@ -1,0 +1,29 @@
+@import "./vars";
+
+.entering {
+    opacity: 1;
+}
+.entered {
+    opacity: 1;
+}
+.exiting {
+    opacity: 0;
+}
+.exited {
+    opacity: 0;
+}
+
+.modal-transition-enter {
+    transform: translateX(100%);
+}
+.modal-transition-enter-active {
+    transition: transform $POPUP_TRANSITION;
+    transform: translateX(0);
+}
+.modal-transition-exit {
+    transform: translateX(0);
+}
+.modal-transition-exit-active {
+    transition: transform $POPUP_TRANSITION;
+    transform: translateX(100%);
+}
