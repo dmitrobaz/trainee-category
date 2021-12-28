@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
-import { BiEdit } from 'react-icons/bi';
+import { RiCloseCircleFill, RiEditBoxFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCategory } from '../../store/actions/app/config/removeCategory';
 import { categorySelected } from '../../store/actions/app/filter/categorySelected';
@@ -11,18 +10,21 @@ interface IPopupCategoryItemProps {
     categoryData: {
         [name: string]: any
     },
-    isEditable: boolean
+    isEdit: boolean,
+    setDeletedItems: any,
+    deletedItems: number[]
 }
 
-const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData, isEditable }) => {
+const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData, isEdit, setDeletedItems, deletedItems }) => {
+
     const dispatch = useDispatch()
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
 
     const [categoryToggle, setCategoryToggle] = useState<boolean>(selectedCards.includes(categoryData.id))
 
     const categoryHandler = (id: number) => {
-        setCategoryToggle(!categoryToggle)
-        !categoryToggle
+        !isEdit && setCategoryToggle(!categoryToggle)
+        !categoryToggle && !isEdit
             ? dispatch(categorySelected(id))
             : dispatch(categoryUnselected(id))
     }
@@ -32,15 +34,24 @@ const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData, is
     }, [selectedCards.includes(categoryData.id)])
 
     const onDeleteCategory = () => {
-        dispatch(removeCategory(categoryData.id))
+        // dispatch(removeCategory(categoryData.id))
+        setCategoryToggle(!categoryToggle)
+        setDeletedItems((prev: any) => [...prev, categoryData.id])
     }
     return (
         <li className="popup-category-item-wrapper">
-            <button onClick={() => categoryHandler(categoryData.id)} className={`popup-category-item ${categoryToggle && 'background-green'}`}>{categoryData.name}</button>
-            {isEditable
+            <button
+                onClick={() => !isEdit ? categoryHandler(categoryData.id) : onDeleteCategory()}
+                className={`popup-category-item ${categoryToggle && !isEdit && 'background-green'} ${categoryToggle && isEdit && 'background-red'}`}
+            //  ${deletedItems.length > 0
+            //         && deletedItems.includes(categoryData.id)
+            //         && 'background-red'}`}
+            >{categoryData.name}
+            </button>
+            {isEdit
                 ? <>
-                    <button className="popup-category-item-edit"><BiEdit /></button>
-                    <button onClick={onDeleteCategory} className="popup-category-item-delete"><AiOutlineCloseSquare /></button>
+                    <button className="popup-category-item-edit"><RiEditBoxFill /></button>
+                    <button onClick={onDeleteCategory} className="popup-category-item-delete"><RiCloseCircleFill /></button>
                 </>
                 : <></>}
         </li>

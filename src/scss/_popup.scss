@@ -50,13 +50,19 @@
             opacity: 0;
             transition: 0.2s ease-in;
             position: absolute;
-            left: 70%;
+            left: 66%;
+            top: -7%;
+            border: none;
+            background-color: transparent;
         }
         &-delete {
             opacity: 0;
             transition: 0.2s ease-in;
             position: absolute;
-            left: 82%;
+            left: 86%;
+            top: -7%;
+            border: none;
+            background-color: transparent;
         }
         &-wrapper {
             position: relative;
@@ -80,9 +86,10 @@
         }
     }
     &-button {
+        display: flex;
         position: absolute;
-        top: convertToVw(160);
-        right: convertToVw(15);
+        top: convertToVw(151);
+        right: convertToVw(9);
     }
     &-wrapper {
         position: fixed;
@@ -148,7 +155,7 @@
         &::after {
             background-color: #ededed;
             position: absolute;
-            width: 100vw;
+            width: convertToVw(375);
             top: 0px;
             height: convertToVw(62);
             display: block;
@@ -188,9 +195,8 @@
         width: 100vw;
         background: white;
         &-button {
-            position: absolute;
-            top: convertToPx(160);
-            right: convertToPx(15);
+            top: convertToPx(151);
+            right: convertToPX(9);
         }
         &-wrapper {
             position: fixed;
@@ -252,6 +258,7 @@
             padding: convertToPx(10) convertToPx(20);
             &::after {
                 height: convertToPx(62);
+                width: convertToPx(375);
             }
             &-title {
                 background-color: #ededed;

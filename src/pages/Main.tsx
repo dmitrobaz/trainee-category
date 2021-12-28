@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useMemo } from "react";
 
 import { Categories, Header, CardColumns } from '../components';
 
@@ -15,12 +15,6 @@ export interface iCategoryContext {
     setCategory: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export const CategoryContext = createContext<iCategoryContext>({
-    category: [],
-    setCategory: () => { },
-});
-
-
 const Main = () => {
     const categoryLocal = utils.jsonParse(localStorage.getItem('category')) ? utils.jsonParse(localStorage.getItem('category')) : categoryConfig
 
@@ -32,14 +26,13 @@ const Main = () => {
         dispatch(setDefaultCategory())
     }, [])
 
-
-    useEffect(() => {
-        console.log('Set category config to local storage')
-        setCategory(categoryLocal)
-        if (!categoryLocal) {
-            localStorage.setItem('category', JSON.stringify(categoryConfig))
-        }
-    }, [])
+    // useEffect(() => {
+    //     console.log('Set category config to local storage')
+    //     setCategory(categoryLocal)
+    //     if (!categoryLocal) {
+    //         localStorage.setItem('category', JSON.stringify(categoryConfig))
+    //     }
+    // }, [])
 
     return (
         <>
@@ -52,9 +45,8 @@ const Main = () => {
                     </p>
                 </section>
 
-                <CategoryContext.Provider value={{ category: category, setCategory: setCategory }}>
-                    <Categories />
-                </CategoryContext.Provider>
+
+                <Categories />
 
                 <CardColumns />
             </main>

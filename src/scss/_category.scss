@@ -2,13 +2,19 @@
 
 .category {
     display: flex;
-    padding: convertToVw(15);
+    // padding: convertToVw(15);
     width: convertToVw(375);
     overflow: auto;
+    &-all-item {
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 0;
+            opacity: 0;
+        }
+    }
     @media screen and (min-width: $MAX_WIDTH) {
         .category {
             width: convertToPx(375);
-            padding: convertToPx(15);
             &-button {
                 padding: convertToPx(5);
                 font-size: convertToPx(14);
@@ -80,22 +86,24 @@
         display: flex;
         justify-content: space-between;
         width: convertToVw(375);
-        padding: convertToVw(11);
+        padding: convertToVw(3) convertToVw(5) 0 0;
         font-size: 12px;
-        align-items: center;
+        align-items: baseline;
         transition: 0.2s ease-in;
         position: fixed;
 
         &-copy {
             display: flex;
             justify-content: space-between;
+            align-items: baseline;
             width: convertToVw(375);
-            padding: convertToVw(11);
+            padding: convertToVw(3) convertToVw(5) 0 0;
+
             font-size: 12px;
             align-items: center;
             @media screen and (min-width: $MAX_WIDTH) {
                 width: convertToPx(375);
-                padding: convertToPx(11);
+                padding: convertToPx(3) convertToVw(5) 0 0;
             }
         }
         &.entering {
@@ -113,11 +121,10 @@
             }
         }
         &.exiting {
-            opacity: 1;
+            opacity: 0;
         }
         &.exited {
             opacity: 0;
-            transform: translateY(-60px);
         }
 
         @media screen and (min-width: $MAX_WIDTH) {
@@ -138,28 +145,12 @@
     }
     &::-webkit-scrollbar {
         width: 0;
+        display: none;
     }
     @media screen and (min-width: $MAX_WIDTH) {
-        padding: convertToPx(15);
         max-width: convertToPx(375);
     }
-    &::after {
-        position: absolute;
-        content: "";
-        width: convertToVw(100);
-        height: convertToVw(33);
-        right: convertToVw(-1);
-        top: convertToVw(120);
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #f3f3f3 100%);
-        pointer-events: none;
 
-        @media screen and (min-width: $MAX_WIDTH) {
-            width: convertToPx(100);
-            height: convertToPx(33);
-            top: convertToPx(120);
-            right: convertToPx(-1);
-        }
-    }
     &-item {
         padding: convertToVw(5) convertToVw(15);
         font-size: convertToVw(15);

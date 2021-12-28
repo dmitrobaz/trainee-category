@@ -9,8 +9,6 @@ import * as utils from '../../utils'
 const AllCards = () => {
     const [view, setView] = useState<boolean>(false)
 
-    console.log("card-columns", view);
-
     const scrollFun = (event: any) => {
         if (window.scrollY > 100) setView(true)
         if (window.scrollY < 150) setView(false)

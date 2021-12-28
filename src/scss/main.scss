@@ -4,6 +4,50 @@
 @import "./category";
 @import "./popup";
 @import "./trasition-group";
+.category-wrapper-test-entered + .card-column-wrapper {
+    padding-top: convertToVw(40);
+    @media screen and (min-width: $MAX_WIDTH) {
+        padding-top: convertToPx(30);
+    }
+}
+
+.category-wrapper-test {
+    display: flex;
+    justify-content: space-between;
+    width: convertToVw(375);
+    padding: convertToVw(3) convertToVw(5) 0 0;
+    font-size: convertToVw(12);
+    align-items: baseline;
+
+    transition: 0.1s ease-in;
+    background: $BGC_MAIN;
+    @media screen and (min-width: $MAX_WIDTH) {
+        width: convertToPx(375);
+        padding: convertToPx(3) 0 0 0;
+        font-size: convertToPx(12);
+        top: convertToPx(100);
+    }
+    &-entered {
+        position: fixed;
+        top: convertToVw(100);
+        display: flex;
+        justify-content: space-between;
+        width: convertToVw(375);
+        padding: convertToVw(3) convertToVw(5) 0 0;
+        font-size: convertToVw(12);
+        align-items: baseline;
+        transition: 0.1s ease-in;
+        background: $BGC_MAIN;
+        box-shadow: 0px 3.2vw 2.66667vw #0000001f;
+        @media screen and (min-width: $MAX_WIDTH) {
+            width: convertToPx(375);
+            padding: convertToPx(3) 0 0 0;
+            font-size: convertToPx(12);
+            top: convertToPx(100);
+            box-shadow: 0px 3.2vw 2.66667vw #0000001f;
+        }
+    }
+}
 
 .test {
     background: red;
@@ -11,6 +55,56 @@
     opacity: 1;
 }
 
+.background-red {
+    // transition: 0.2s ease-in;
+    background: $BGC_DELETED_ITEM;
+}
+
+.fixed-popup-btn {
+    position: fixed;
+    display: flex;
+    top: 143px;
+    z-index: 13;
+    /* width: 90.13333vw; */
+    right: 7px;
+}
+
+.category-wrapper-slide-from-top {
+    position: absolute;
+    left: 0;
+}
+.category-section-wrapper-copy {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-popup {
+    display: flex;
+    position: absolute;
+    top: 145px;
+    right: 8px;
+    &-fixed {
+        position: fixed;
+        display: flex;
+        z-index: 13;
+        transform: translateX(100px);
+        top: 145px;
+        right: 8px;
+        &.entering {
+            opacity: 0;
+        }
+        &.entered {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+        &.exiting {
+            opacity: 0;
+        }
+        &.exited {
+            opacity: 0;
+        }
+    }
+}
 * {
     padding: 0;
     margin: 0;
@@ -59,7 +153,7 @@ body {
             width: calc(50vw - 285px);
             background-color: white;
             z-index: 9999;
-            position: absolute;
+            position: fixed;
             right: 0;
         }
     }

@@ -4,31 +4,42 @@ import ReactDOM from 'react-dom';
 import { categoryConfig } from "../../config";
 
 import { AddEditCategory, CategoryItems, PopupHeader } from '..';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCategory } from '../../store/actions/app';
+
+import * as utils from "../../utils";
+
 
 interface IPopupProps {
   showCloseIcon?: any,
   onToggle?: any,
   title: string,
   children?: any,
-  className?: any,
-  open?: any,
+  className?: string,
+  setDeletedItems: React.Dispatch<React.SetStateAction<number[]>>,
+  deletedItems: number[]
+
 }
 
-const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, className }) => {
+const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, className, deletedItems, setDeletedItems }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [isAdd, setIsAdd] = useState<boolean>(false)
   const [newCategory, setNewCategory] = useState<any>()
+
+  const dispatch = useDispatch()
 
   const configCategory = useSelector(({ app }: any) => app.config.category)
 
   const changeConfigHandler = () => {
     console.log('changeConfigHandler');
-
   }
 
+  // useEffect(() => {
+  //   const temp = utils.getCategoryNamesById(deletedItems, categoryConfig)
 
-
+  //   deletedItems.length > 0 && console.log('toplevel', deletedItems);
+  //   setDeletedItems([])
+  // }, [isEdit])
 
   const modalMarkup = (
     <section className={`${className} popup-wrapper ${showCloseIcon && 'overflow-x-enable'}`}>
@@ -45,15 +56,18 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, classNam
           setIsAdd={setIsAdd}
           newCategory={newCategory}
           setNewCategory={setNewCategory}
-          config={configCategory}
+          configCategory={configCategory}
           setConfig={changeConfigHandler}
+          deletedItems={deletedItems}
+          setDeletedItems={setDeletedItems}
         />
-
         <CategoryItems
-          category={configCategory}
+          categoryObj={configCategory}
           changeConfig={changeConfigHandler}
           isEdit={isEdit}
           className='popup-section-items-wrapper'
+          deletedItems={deletedItems}
+          setDeletedItems={setDeletedItems}
         />
       </section>
     </section >

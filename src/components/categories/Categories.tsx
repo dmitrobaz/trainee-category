@@ -1,68 +1,122 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 
-import { CategoryItems, Popup, PopupButton } from '..';
-
-import { CategoryContext } from "../../pages/Main"
-
-import * as utils from "../../utils";
+import { CategoryItems, PopupButton, SearchCategory } from '..';
 
 interface ICategoriesProps {
     categoryConfig?: any
 }
 
-const Categories: React.FC<ICategoriesProps> = ({ categoryConfig }) => {
+const Categories: React.FC<ICategoriesProps> = () => {
     const categoryObj = useSelector(({ app }: any) => app.config.category)
+    const isPopupOpen = useSelector(({ app }: any) => app.states.popup)
+
+    const [isOnThisPage, setIsOnThisPage] = useState<boolean>(false)
+    const [scrollView, setScrollView] = useState<boolean>(false)
+
+    useEffect(() => {
+        setIsOnThisPage(!isOnThisPage)
+    }, [isPopupOpen])
+
     // const category = utils.jsonParse(localStorage.getItem('categories')) ? utils.jsonParse(localStorage.getItem('categories')) : categoryConfig
-    // const categoryObj = useContext(CategoryContext)
 
-    const categoryLength = categoryObj.length
+    const isCategoryWithSearch = categoryObj.length > 10
 
-    console.log("categoryLength", categoryLength);
+    const scrollFun = () => {
+        if (window.matchMedia("(max-width: 568px)").matches) {
+            if (window.scrollY > 50) setScrollView(true)
+            if (window.scrollY < 100) setScrollView(false)
+            return
+        } else {
+            if (window.scrollY > 140) setScrollView(true)
+            if (window.scrollY < 200) setScrollView(false)
+            return
+        }
 
-    const [view, setView] = useState<boolean>(false)
-
-    const scrollFun = (event: any) => {
-        if (window.scrollY > 100) setView(true)
-        if (window.scrollY < 100) setView(false)
 
     }
     useEffect(() => {
         document.addEventListener('scroll', scrollFun)
     }, [])
     return (
-        <>{categoryLength < 10
-            ? <CategoryItems category={categoryObj} className={`category-wrapper-copy`} isEdit={false} />
-            : <section className="category-wrapper-copy">
-                <div className='category-search'>
-                    <input className='category-search' type="text" placeholder='Search product' />
-                    <button className='category-button'>Search</button>
-                </div>
-                <PopupButton />
-            </section>}
-            {
-                categoryLength < 10
-                    ? <Transition
-                        in={view}
-                        timeout={1000}>
-                        {state => <CategoryItems category={categoryObj} className={`category category-fixed ${state}`} isEdit={false} />}
-                    </Transition>
-                    : <Transition
-                        in={view}
-                        timeout={0}>
-                        {state => {
-                            return (<section className={`category-wrapper ${state}`}>
-                                <div className='category-search'>
-                                    <input className='category-search' type="text" placeholder='Search product' />
-                                    <button className='category-button'>Search</button>
-                                </div>
-                                <PopupButton />
-                            </section>)
-                        }}
-                    </Transition>
-            }
+        <>
+            {isCategoryWithSearch
+                // CATEGORY PART WITH SEARCH AND POPUP BUTTON 
+                ?
+                <section className={`category-wrapper-test${scrollView ? `-entered` : ``}`}>
+                    <SearchCategory />
+                    <PopupButton />
+                </section>
+                // CATEGORY PART WITH CATEGORY ITEMS AND POPUP BUTTON 
+                : <>
+                    <section id='test' className={`category-wrapper-test${scrollView ? `-entered` : ``}`}>
+                        <CategoryItems
+                            categoryObj={categoryObj}
+                            className={`category category-wrapper-copy`}
+                            isEdit={false}
+                        />
+                        <PopupButton className="button-popup-test" />
+                    </section>
+                </>}
         </>
+        // <>
+        //     {true
+        //         // CATEGORY PART WITH SEARCH AND POPUP BUTTON 
+        //         ? <>
+        //             <Transition
+        //                 in={scrollView}
+        //                 timeout={0}
+        //             >
+        //                 {state => {
+        //                     return <section className="category category-wrapper-copy">
+        //                         <div className='category-search'>
+        //                             <input className='category-search' type="text" placeholder='Search product' />
+        //                             <button className='category-button'>Search</button>
+        //                         </div>
+        //                         <PopupButton />
+        //                     </section>
+        //                 }}
+        //             </Transition>
+
+        //             <Transition
+        //                 in={scrollView}
+        //                 timeout={0}>
+        //                 {state => {
+        //                     return (<section className={`category-wrapper ${state}`}>
+        //                         <div className='category-search'>
+        //                             <input className='category-search' type="text" placeholder='Search product' />
+        //                             <button className='category-button'>Search</button>
+        //                         </div>
+        //                         <PopupButton />
+        //                     </section>)
+        //                 }}
+        //             </Transition>
+        //         </>
+        //         // CATEGORY PART WITH CATEGORY ITEMS AND POPUP BUTTON 
+        //         : <>
+        //             <CategoryItems
+        //                 categoryObj={categoryObj}
+        //                 className={`category category-wrapper-copy`}
+        //                 isEdit={false}
+        //             />
+
+        //             <PopupButton className="button-popup" />
+
+        //             <Transition
+        //                 in={scrollView}
+        //                 timeout={0}>
+        //                 {state => <>
+        //                     <CategoryItems
+        //                         categoryObj={categoryObj}
+        //                         className={`category-all-item category-wrapper ${state}`}
+        //                         isEdit={false}
+        //                     />
+        //                     <PopupButton className={`button-popup-fixed ${state}`} /></>
+        //                 }
+        //             </Transition>
+        //         </>}
+        // </>
     );
 };
 

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AiFillEdit } from 'react-icons/ai';
 import { GoCheck, GoX } from 'react-icons/go';
-import { useDispatch } from 'react-redux';
 
-
-import { CategoryContext } from "../../pages/Main"
 import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
+
 
 
 interface IAddEditCategoryProps {
@@ -16,14 +15,16 @@ interface IAddEditCategoryProps {
     setIsAdd: any,
     newCategory: any,
     setNewCategory: any,
-    config: any,
+    configCategory: { id: number, name: string }[],
     setConfig: any
+    deletedItems?: any,
+    setDeletedItems?: any
 
 }
 
-const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, isAdd, setIsAdd, newCategory, setNewCategory, config, setConfig }) => {
+const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, isAdd, deletedItems, setDeletedItems, configCategory }) => {
     const [inputValue, setInputValue] = useState<string>()
-    const categoryObj = useContext(CategoryContext)
+    const categoryObj = useSelector(({ app }: any) => app.config.category)
 
     const dispatch = useDispatch()
     // console.log("categoryObj.category", categoryObj.category);
@@ -45,13 +46,17 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
     }
 
 
-    useEffect(() => {
-        localStorage.setItem('category', JSON.stringify(categoryObj.category))
-    }, [categoryObj.category])
+    // useEffect(() => {
+    //     localStorage.setItem('category', JSON.stringify(categoryObj.category))
+    // }, [categoryObj.category])
 
     const addNewCategoryHandler = () => {
         // categoryObj.setCategory((prev: any) => [...prev, { id: prev.length + 1, name: inputValue }])
         inputValue && dispatch(addNewCategory(inputValue))
+    }
+
+    const editToggleHandler = () => {
+        setIsEdit(!isEdit)
     }
 
     return (
@@ -63,7 +68,7 @@ const AddEditCategory: React.FC<IAddEditCategoryProps> = ({ isEdit, setIsEdit, i
                 <div className='popup-display-flex'>
                     <button
                         className='category-button'
-                        onClick={() => setIsEdit(!isEdit)}>
+                        onClick={() => editToggleHandler()}>
                         {!isEdit ? <AiFillEdit /> : <GoCheck />}
                     </button>
 

@@ -2,29 +2,29 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GoCheck, GoX, GoPlus } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CSSTransition, Transition } from 'react-transition-group';
 import { PopupCategoryItem } from '..';
 
-import { CategoryContext } from "../../pages/Main"
 import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 import { categoryAllSelected } from '../../store/actions/app/filter/categoryAllSelected';
-import { categoryUnselected } from '../../store/actions/app/filter/categoryUnselected';
 
 
 interface ICategoryItemsProps {
-    category: any,
+    categoryObj: any,
     isEdit: boolean,
     className: string,
-    changeConfig?: any
+    changeConfig?: any,
+    setDeletedItems?: any,
+    deletedItems?: any
 }
 
-const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => {
+const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, deletedItems, setDeletedItems, categoryObj }) => {
     const [isAdd, setIsAdd] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>()
 
     const dispatch = useDispatch()
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
-    const categoryObj = useSelector(({ app }: any) => app.config.category)
+    // const categoryObj = useSelector(({ app }: any) => app.config.category)
+
 
     const isSelectedAllCards = selectedCards.length === 0 || selectedCards[0] === 0
 
@@ -45,11 +45,11 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
         dispatch(categoryAllSelected())
     }
 
-    const onDelete = (id: any) => {
-        const newConfigState = categoryObj.category.filter((item: any) => item.id !== id)
-        categoryObj.setCategory(newConfigState)
-        console.log('newConfigState', newConfigState);
-    };
+    // const onDelete = (id: any) => {
+    //     const newConfigState = categoryObj.category.filter((item: any) => item.id !== id)
+    //     categoryObj.setCategory(newConfigState)
+    //     console.log('newConfigState', newConfigState);
+    // };
 
     return (
         <ul className={className}>
@@ -58,7 +58,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
                     onClick={() => isEdit
                         ? setIsAdd(!isAdd)
                         : selectAllCategoryHandler()}
-                    className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''}`}>
+                    className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''} `}>
                     {isEdit ? <GoPlus /> : "All"}
                 </button>
                 : <div><input
@@ -78,7 +78,12 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className }) => 
                         <GoX />
                     </button>
                 </div>}
-            {categoryObj.map((item: any, key: number) => <PopupCategoryItem key={`${key + item.name}`} categoryData={item} isEditable={isEdit} />)}
+            {categoryObj.map((item: any, key: number) => <PopupCategoryItem
+                key={`${key + item.name}`}
+                categoryData={item}
+                isEdit={isEdit}
+                deletedItems={deletedItems}
+                setDeletedItems={setDeletedItems} />)}
         </ul >
 
     );
