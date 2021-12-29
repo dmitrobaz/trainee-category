@@ -2,24 +2,28 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GoCheck, GoX, GoPlus } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { PopupCategoryItem } from '..';
+import { AddNewCategory, PopupCategoryItem } from '..';
 
 import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 import { categoryAllSelected } from '../../store/actions/app/filter/categoryAllSelected';
 
 
 interface ICategoryItemsProps {
-    categoryObj: any,
+    categoryObj: {
+        id: number,
+        name: string
+    }[],
     isEdit: boolean,
     className: string,
-    changeConfig?: any,
+    setConfig?: any,
     setDeletedItems?: any,
     deletedItems?: any
 }
 
-const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, deletedItems, setDeletedItems, categoryObj }) => {
+const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, deletedItems, setDeletedItems, categoryObj,setConfig }) => {
     const [isAdd, setIsAdd] = useState<boolean>(false)
     const [inputValue, setInputValue] = useState<string>()
+    
 
     const dispatch = useDispatch()
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
@@ -61,23 +65,11 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, delet
                     className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''} `}>
                     {isEdit ? <GoPlus /> : "All"}
                 </button>
-                : <div><input
-                    className='popup-add-input'
-                    placeholder='Add a new category'
-                    type="text"
-                    value={inputValue}
-                    onChange={(e: any) => onChangeHandler(e)} />
-                    <button
-                        className='category-button'
-                        onClick={() => addNewCategoryHandler()}>
-                        <GoCheck />
-                    </button>
-                    <button
-                        className='category-button'
-                        onClick={() => setIsAdd(!isAdd)}>
-                        <GoX />
-                    </button>
-                </div>}
+                : <AddNewCategory
+                    isAdd={isAdd}
+                    setIsAdd={setIsAdd}
+                    setConfig={setConfig}
+                />}
             {categoryObj.map((item: any, key: number) => <PopupCategoryItem
                 key={`${key + item.name}`}
                 categoryData={item}

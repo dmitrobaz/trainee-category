@@ -1,3 +1,6 @@
 export const initState = {
-    popup: false
+    isPopupOpen: false,
+    isEditCategory: false,
+    isAddNewCategory: false,
+    isRenameCategory: false
 }

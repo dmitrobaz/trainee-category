@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { filter } from './app/filter';
 import { config } from './app/config';
 import { states } from './app/states';
-
+import { interim } from './app/interim';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +11,8 @@ const rootReducer = combineReducers({
     app: combineReducers({
         filter,
         config,
-        states
+        states,
+        interim
     })
 })
 

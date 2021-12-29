@@ -5,35 +5,46 @@ import { categoryConfig } from "../../config";
 
 import { AddEditCategory, CategoryItems, PopupHeader } from '..';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCategory } from '../../store/actions/app';
+import { interimDeleteCategory, removeCategory } from '../../store/actions/app';
 
 import * as utils from "../../utils";
 
 
 interface IPopupProps {
-  showCloseIcon?: any,
-  onToggle?: any,
+  isPopupOpen: boolean,
+  togglePopup: React.Dispatch<React.SetStateAction<boolean>>,
   title: string,
-  children?: any,
-  className?: string,
-  setDeletedItems: React.Dispatch<React.SetStateAction<number[]>>,
-  deletedItems: number[]
+  className?: string
 
 }
 
-const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, className, deletedItems, setDeletedItems }) => {
-  const [isEdit, setIsEdit] = useState<boolean>(false)
+const Popup: React.FC<IPopupProps> = ({ isPopupOpen, togglePopup, title, className }) => {
+  const configCategory = useSelector(({ app }: any) => app.config.category)
+  const isEdit = useSelector(({ app }: any) => app.states.isEditCategory)
+  const deletedItems = useSelector(({ app }: any) => app.interim.deleteItems)
+
   const [isAdd, setIsAdd] = useState<boolean>(false)
   const [newCategory, setNewCategory] = useState<any>()
+  const [config, setConfig] = useState<any>(configCategory)
+
 
   const dispatch = useDispatch()
 
-  const configCategory = useSelector(({ app }: any) => app.config.category)
+  const setDeletedItems = () => {
+    dispatch(interimDeleteCategory([1]))
+  }
+
 
   const changeConfigHandler = () => {
     console.log('changeConfigHandler');
   }
+  useEffect(() => {
+    const temp = utils.categoryFilter(configCategory, deletedItems)
 
+    deletedItems.length > 0 && setConfig(temp)
+    // setDeletedItems([])
+    // setConfig()
+  }, [deletedItems])
   // useEffect(() => {
   //   const temp = utils.getCategoryNamesById(deletedItems, categoryConfig)
 
@@ -42,18 +53,14 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, classNam
   // }, [isEdit])
 
   const modalMarkup = (
-    <section className={`${className} popup-wrapper ${showCloseIcon && 'overflow-x-enable'}`}>
+    <section className={`${className} popup-wrapper ${isPopupOpen && 'overflow-x-enable'}`}>
       <PopupHeader
-        onClosePopup={onToggle}
+        togglePopup={togglePopup}
         titleHeaderPopup={title}
-        showCloseIcon={showCloseIcon}
+        isPopupOpen={isPopupOpen}
       />
       <section className='popup-section'>
         <AddEditCategory
-          isAdd={isAdd}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
-          setIsAdd={setIsAdd}
           newCategory={newCategory}
           setNewCategory={setNewCategory}
           configCategory={configCategory}
@@ -62,12 +69,10 @@ const Popup: React.FC<IPopupProps> = ({ showCloseIcon, onToggle, title, classNam
           setDeletedItems={setDeletedItems}
         />
         <CategoryItems
-          categoryObj={configCategory}
-          changeConfig={changeConfigHandler}
+          categoryObj={config}
+          setConfig={setConfig}
           isEdit={isEdit}
           className='popup-section-items-wrapper'
-          deletedItems={deletedItems}
-          setDeletedItems={setDeletedItems}
         />
       </section>
     </section >

@@ -17,8 +17,8 @@ interface IPopupButtonProps {
 const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
   // const [isOpen, toggleOpen] = useState<boolean>(false);
   const dispatch = useDispatch()
-  const isOpen = useSelector(({ app }: any) => app.states.popup)
-  const [deletedItems, setDeletedItems] = useState<number[]>([])
+  const isOpen = useSelector(({ app }: any) => app.states.isPopupOpen)
+  const deletedItems = useSelector(({ app }: any) => app.interim.deleteItems)
 
   const toggleOpenHandler = () => {
     dispatch(togglePopup())
@@ -51,10 +51,8 @@ const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
         timeout={transitionDuration}>
         <Popup
           title="Filters"
-          showCloseIcon={isOpen}
-          onToggle={toggleOpenHandler}
-          deletedItems={deletedItems}
-          setDeletedItems={setDeletedItems}
+          isPopupOpen={isOpen}
+          togglePopup={toggleOpenHandler}
         />
       </CSSTransition>
     </>

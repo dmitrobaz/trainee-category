@@ -47,6 +47,7 @@
             width: convertToVw(50);
         }
         &-edit {
+            font-size: 20px;
             opacity: 0;
             transition: 0.2s ease-in;
             position: absolute;
@@ -56,6 +57,7 @@
             background-color: transparent;
         }
         &-delete {
+            font-size: 20px;
             opacity: 0;
             transition: 0.2s ease-in;
             position: absolute;

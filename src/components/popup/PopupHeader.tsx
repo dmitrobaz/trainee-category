@@ -4,16 +4,16 @@ import { MdKeyboardBackspace } from "react-icons/md"
 
 
 interface IPopupHeaderProps {
-    showCloseIcon: boolean,
+    isPopupOpen: boolean,
     titleHeaderPopup: string,
-    onClosePopup: (arg: boolean) => boolean
+    togglePopup: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PopupHeader: React.FC<IPopupHeaderProps> = ({ showCloseIcon, titleHeaderPopup, onClosePopup }) => {
+const PopupHeader: React.FC<IPopupHeaderProps> = ({ isPopupOpen, titleHeaderPopup, togglePopup }) => {
     return (
         <header className='popup-header'>
             {/* CLOSE POPUP  */}
-            <button className='popup-back' onClick={() => onClosePopup(!showCloseIcon)}><MdKeyboardBackspace /></button>
+            <button className='popup-back' onClick={() => togglePopup(!isPopupOpen)}><MdKeyboardBackspace /></button>
             <h1 className='popup-title'>{titleHeaderPopup}</h1>
         </header>
     );
