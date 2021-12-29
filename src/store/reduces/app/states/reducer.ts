@@ -9,7 +9,8 @@ export const states = (state: any = initState, action: any) => {
                 isPopupOpen: !state.isPopupOpen,
                 isEditCategory: state.isEditCategory,
                 isAddNewCategory: state.isAddNewCategory,
-                isRenameCategory: state.isRenameCategory
+                isRenameCategory: state.isRenameCategory,
+                isSaveCategory: state.isSaveCategory
             }
         }
         case statesTypes.TOGGLE_EDIT_CATEGORY: {
@@ -17,7 +18,8 @@ export const states = (state: any = initState, action: any) => {
                 isPopupOpen: state.isPopupOpen,
                 isEditCategory: !state.isEditCategory,
                 isAddNewCategory: state.isAddNewCategory,
-                isRenameCategory: state.isRenameCategory
+                isRenameCategory: state.isRenameCategory,
+                isSaveCategory: state.isSaveCategory
             }
         }
         case statesTypes.TOGGLE_ADD_CATEGORY: {
@@ -25,7 +27,8 @@ export const states = (state: any = initState, action: any) => {
                 isPopupOpen: state.isPopupOpen,
                 isEditCategory: state.isEditCategory,
                 isAddNewCategory: !state.isAddNewCategory,
-                isRenameCategory: state.isRenameCategory
+                isRenameCategory: state.isRenameCategory,
+                isSaveCategory: state.isSaveCategory
             }
         }
         case statesTypes.TOGGLE_RENAME_CATEGORY: {
@@ -33,7 +36,17 @@ export const states = (state: any = initState, action: any) => {
                 isPopupOpen: state.isPopupOpen,
                 isEditCategory: state.isEditCategory,
                 isAddNewCategory: state.isAddNewCategory,
-                isRenameCategory: !state.isRenameCategory
+                isRenameCategory: !state.isRenameCategory,
+                isSaveCategory: state.isSaveCategory
+            }
+        }
+        case statesTypes.TOGGLE_SAVE_CATEGORY: {
+            return {
+                isPopupOpen: state.isPopupOpen,
+                isEditCategory: state.isEditCategory,
+                isAddNewCategory: state.isAddNewCategory,
+                isRenameCategory: state.isRenameCategory,
+                isSaveCategory: action.payload
             }
         }
 

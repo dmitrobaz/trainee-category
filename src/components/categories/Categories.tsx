@@ -3,61 +3,42 @@ import { useSelector } from 'react-redux';
 
 import { CategoryItems, PopupButton, SearchCategory } from '..';
 
-interface ICategoriesProps {
-    categoryConfig?: any
-}
-
-const Categories: React.FC<ICategoriesProps> = () => {
-    const categoryObj = useSelector(({ app }: any) => app.config.category)
-    const isPopupOpen = useSelector(({ app }: any) => app.states.popup)
-
-    const [isOnThisPage, setIsOnThisPage] = useState<boolean>(false)
+const Categories: React.FC = () => {
     const [scrollView, setScrollView] = useState<boolean>(false)
 
-    useEffect(() => {
-        setIsOnThisPage(!isOnThisPage)
-    }, [isPopupOpen])
-
-    // const category = utils.jsonParse(localStorage.getItem('categories')) ? utils.jsonParse(localStorage.getItem('categories')) : categoryConfig
+    const categoryObj = useSelector(({ app }: any) => app.config.category)
 
     const isCategoryWithSearch = categoryObj.length > 10
 
-    const scrollFun = () => {
-        if (window.matchMedia("(max-width: 568px)").matches) {
-            if (window.scrollY > 50) setScrollView(true)
-            if (window.scrollY < 100) setScrollView(false)
-            return
-        } else {
-            if (window.scrollY > 140) setScrollView(true)
-            if (window.scrollY < 200) setScrollView(false)
-            return
-        }
-
-
+    const scrollHandler = () => {
+        const heightMainTop = document.querySelector<HTMLElement>('.main-top')?.offsetHeight || 100
+        window.scrollY > heightMainTop ? setScrollView(true) : setScrollView(false)
     }
+
     useEffect(() => {
-        document.addEventListener('scroll', scrollFun)
+        document.addEventListener('scroll', scrollHandler)
     }, [])
+    
     return (
         <>
             {isCategoryWithSearch
-                // CATEGORY PART WITH SEARCH AND POPUP BUTTON 
+                // CATEGORY SECTION WITH SEARCH AND POPUP BUTTON 
                 ?
-                <section className={`category-wrapper-test${scrollView ? `-entered` : ``}`}>
+                <section className={`category-wrapper${scrollView ? `-entered` : ``}`}>
                     <SearchCategory />
                     <PopupButton />
                 </section>
-                // CATEGORY PART WITH CATEGORY ITEMS AND POPUP BUTTON 
-                : <>
-                    <section id='test' className={`category-wrapper-test${scrollView ? `-entered` : ``}`}>
-                        <CategoryItems
-                            categoryObj={categoryObj}
-                            className={`category category-wrapper-copy`}
-                            isEdit={false}
-                        />
-                        <PopupButton className="button-popup-test" />
-                    </section>
-                </>}
+                // CATEGORY SECTION WITH CATEGORY ITEMS AND POPUP BUTTON 
+                :
+                <section className={`category-wrapper${scrollView ? `-entered` : ``}`}>
+                    <CategoryItems
+                        categoryObj={categoryObj}
+                        className={`category category-wrapper-copy`}
+                        isEdit={false}
+                    />
+                    <PopupButton className="button-popup-test" />
+                </section>
+            }
         </>
     );
 };

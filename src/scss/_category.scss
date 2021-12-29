@@ -1,5 +1,12 @@
 @import "./vars";
 
+.category-wrapper-entered + .card-column-wrapper {
+    padding-top: convertToVw(40);
+    @media screen and (min-width: $MAX_WIDTH) {
+        padding-top: convertToPx(40);
+    }
+}
+
 .category {
     display: flex;
     // padding: convertToVw(15);
@@ -87,62 +94,99 @@
         justify-content: space-between;
         width: convertToVw(375);
         padding: convertToVw(3) convertToVw(5) 0 0;
-        font-size: 12px;
+        font-size: convertToVw(12);
         align-items: baseline;
-        transition: 0.2s ease-in;
-        position: fixed;
 
-        &-copy {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            width: convertToVw(375);
-            padding: convertToVw(3) convertToVw(5) 0 0;
-
-            font-size: 12px;
-            align-items: center;
-            @media screen and (min-width: $MAX_WIDTH) {
-                width: convertToPx(375);
-                padding: convertToPx(3) convertToVw(5) 0 0;
-            }
-        }
-        &.entering {
-            opacity: 1;
-        }
-        &.entered {
-            opacity: 1;
-            top: convertToVw(102);
-            z-index: 3;
-            background-color: #ededed;
-            box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
-            @media screen and (min-width: $MAX_WIDTH) {
-                top: convertToPx(102);
-                box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
-            }
-        }
-        &.exiting {
-            opacity: 0;
-        }
-        &.exited {
-            opacity: 0;
-        }
-
+        transition: 0.1s ease-in;
+        background: $BGC_MAIN;
         @media screen and (min-width: $MAX_WIDTH) {
             width: convertToPx(375);
-            padding: convertToPx(11);
+            padding: convertToPx(3) convertToPx(5) 0 0;
+            font-size: convertToPx(12);
+            top: convertToPx(100);
         }
-        &-fixed {
+        &-entered {
             position: fixed;
-            top: convertToVw(102);
-            z-index: 3;
-            background-color: #ededed;
-            box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+            top: convertToVw(100);
+            display: flex;
+            justify-content: space-between;
+            width: convertToVw(375);
+            padding: convertToVw(3) convertToVw(5) 0 0;
+            font-size: convertToVw(12);
+            align-items: baseline;
+            transition: 0.1s ease-in;
+            background: $BGC_MAIN;
+            box-shadow: 0px 3.2vw 2.66667vw #0000001f;
             @media screen and (min-width: $MAX_WIDTH) {
-                top: convertToPx(102);
-                box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+                width: convertToPx(375);
+                padding: convertToPx(3) convertToPx(5) 0 0;
+                font-size: convertToPx(12);
+                top: convertToPx(100);
+                box-shadow: 0px 3.2vw 2.66667vw #0000001f;
             }
         }
     }
+    // &-wrapper {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     width: convertToVw(375);
+    //     padding: convertToVw(3) convertToVw(5) 0 0;
+    //     font-size: 12px;
+    //     align-items: baseline;
+    //     transition: 0.2s ease-in;
+    //     position: fixed;
+
+    //     &-copy {
+    //         display: flex;
+    //         justify-content: space-between;
+    //         align-items: baseline;
+    //         width: convertToVw(375);
+    //         padding: convertToVw(3) convertToVw(5) 0 0;
+
+    //         font-size: 12px;
+    //         align-items: center;
+    //         @media screen and (min-width: $MAX_WIDTH) {
+    //             width: convertToPx(375);
+    //             padding: convertToPx(3) convertToVw(5) 0 0;
+    //         }
+    // //     }
+    //     &.entering {
+    //         opacity: 1;
+    //     }
+    //     &.entered {
+    //         opacity: 1;
+    //         top: convertToVw(102);
+    //         z-index: 3;
+    //         background-color: #ededed;
+    //         box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+    //         @media screen and (min-width: $MAX_WIDTH) {
+    //             top: convertToPx(102);
+    //             box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+    //         }
+    //     }
+    //     &.exiting {
+    //         opacity: 0;
+    //     }
+    //     &.exited {
+    //         opacity: 0;
+    //     }
+
+    //     @media screen and (min-width: $MAX_WIDTH) {
+    //         width: convertToPx(375);
+    //         padding: convertToPx(11);
+    //     }
+    //     &-fixed {
+    //         position: fixed;
+    //         top: convertToVw(102);
+    //         z-index: 3;
+    //         background-color: #ededed;
+    //         box-shadow: 0px convertToVw(12) convertToVw(10) #0000001f;
+    //         @media screen and (min-width: $MAX_WIDTH) {
+    //             top: convertToPx(102);
+    //             box-shadow: 0px convertToPx(12) convertToPx(10) #0000001f;
+    //         }
+    //     }
+    // }
     &::-webkit-scrollbar {
         width: 0;
         display: none;

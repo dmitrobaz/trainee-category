@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { RiCloseCircleFill, RiEditBoxFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddNewCategory } from '..';
-import { interimDeleteCategory } from '../../store/actions/app';
-import { removeCategory } from '../../store/actions/app/config/removeCategory';
-import { categorySelected } from '../../store/actions/app/filter/categorySelected';
-import { categoryUnselected } from '../../store/actions/app/filter/categoryUnselected';
 
+import { AddNewCategory } from '..';
+
+import { interimDeleteCategory, categorySelected, categoryUnselected } from '../../store/actions/app';
 
 interface IPopupCategoryItemProps {
     categoryData: {
         [name: string]: any
-    },
-    isEdit: boolean,
-    setDeletedItems: any,
-    deletedItems: number[]
+    }
 }
 
-const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData, isEdit, setDeletedItems, deletedItems }) => {
-
+const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData }) => {
     const dispatch = useDispatch()
+
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
+    const isEdit = useSelector(({ app }: any) => app.states.isEditCategory)
 
     const [isAdd, setIsAdd] = useState<boolean>(false)
     const [isEditCategoryItem, setIsEditCategoryItem] = useState<boolean>(false)
@@ -33,25 +29,23 @@ const PopupCategoryItem: React.FC<IPopupCategoryItemProps> = ({ categoryData, is
             : dispatch(categoryUnselected(id))
     }
 
-    useEffect(() => {
-        setCategoryToggle(selectedCards.includes(categoryData.id))
-    }, [selectedCards.includes(categoryData.id)])
-
     const onDeleteCategory = () => {
         // dispatch(removeCategory(categoryData.id))
         setCategoryToggle(!categoryToggle)
         dispatch(interimDeleteCategory(categoryData.id))
         // setDeletedItems((prev: any) => [...prev, categoryData.id])
     }
+    useEffect(() => {
+        setCategoryToggle(selectedCards.includes(categoryData.id))
+    }, [selectedCards.includes(categoryData.id)])
+
+
     return (
         <li className={!isEditCategoryItem ? "popup-category-item-wrapper" : ''}>
             {!isEditCategoryItem
                 ? <button
                     onClick={() => !isEdit && categoryHandler(categoryData.id)}
                     className={`popup-category-item ${categoryToggle && !isEdit ? 'background-green' : ''} ${categoryToggle && isEdit ? 'background-red' : ''}`}
-                //  ${deletedItems.length > 0
-                //         && deletedItems.includes(categoryData.id)
-                //         && 'background-red'}`}
                 >{categoryData.name}
                 </button>
                 : <AddNewCategory

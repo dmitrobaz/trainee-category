@@ -1,46 +1,43 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import Popup from './Popup';
 
-import { CSSTransition } from 'react-transition-group';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeCategory, togglePopup } from '../../store/actions/app';
+import { interimClearCategory, removeCategory, togglePopup } from '../../store/actions/app';
 
 import { GiHamburgerMenu } from "react-icons/gi"
 
 interface IPopupButtonProps {
-  onShow?: () => void,
-  transitionIn?: boolean,
   className?: string
 }
 
 const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
-  // const [isOpen, toggleOpen] = useState<boolean>(false);
   const dispatch = useDispatch()
+
   const isOpen = useSelector(({ app }: any) => app.states.isPopupOpen)
   const deletedItems = useSelector(({ app }: any) => app.interim.deleteItems)
 
-  const toggleOpenHandler = () => {
-    dispatch(togglePopup())
-  }
-  const transitionDuration = 500;
-
-  const bodyId = document.getElementById('body')
-
-
   useEffect(() => {
     if (isOpen) {
-      bodyId?.classList.add('overflow-x-disable')
+      document.getElementById('body')?.classList.add('overflow-x-disable')
       return
     } else {
-      bodyId?.classList.remove('overflow-x-disable')
-      setTimeout(() => deletedItems.length > 0 && deletedItems.forEach((id: number) => dispatch(removeCategory(id))), 500)
+      document.getElementById('body')?.classList.remove('overflow-x-disable')
+      setTimeout(() => {
+        if (deletedItems.length > 0) {
+          deletedItems.forEach((id: number) => {
+            return dispatch(removeCategory(id))
+          })
+          dispatch(interimClearCategory())
+        }
+      }, 500)
     }
   }, [isOpen])
 
   return (
     <>
-      <button className={`category-button ${className}`} type="button" onClick={() => toggleOpenHandler()}>
+      <button className={`category-button ${className && className}`} type="button" onClick={() => dispatch(togglePopup())}>
         <GiHamburgerMenu />
       </button>
       <CSSTransition
@@ -48,11 +45,9 @@ const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
         className="modal-transition"
         classNames="modal-transition"
         unmountOnExit
-        timeout={transitionDuration}>
+        timeout={500}>
         <Popup
           title="Filters"
-          isPopupOpen={isOpen}
-          togglePopup={toggleOpenHandler}
         />
       </CSSTransition>
     </>

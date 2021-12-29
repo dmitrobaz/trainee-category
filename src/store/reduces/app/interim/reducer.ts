@@ -14,6 +14,9 @@ export const interim = (state: any = initState, action: any) => {
                 ...state, deleteItems: [...state.deleteItems, action.payload]
             }
         }
+        case interimTypes.INTERIM_CLEAR_DELETED_CATEGORY: {
+            return initState
+        }
         default: return state
     }
 }
