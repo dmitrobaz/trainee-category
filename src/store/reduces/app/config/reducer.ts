@@ -17,6 +17,10 @@ export const config = (state: any = initState, action: any) => {
             const filteredCategory = state.category.filter((item: any) => item.id !== action.payload)
             return { category: [...filteredCategory] }
         }
+        case configTypes.RENAME_CATEGORY: {
+            const renamedCategory = state.category.map((item: any) => item.id === action.payload.id ? { id: item.id, name: action.payload.name } : item)
+            return { category: [...renamedCategory] }
+        }
         default: return state
     }
 }

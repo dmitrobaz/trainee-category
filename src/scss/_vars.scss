@@ -3,22 +3,29 @@ $MIN_WIDTH: 375px;
 
 $BGC_HEADER: cadetblue;
 $BGC_GREEN_HOVER: #5f9ea093;
-
 $BGC_MAIN: #f3f3f3;
-$BORDER_INPUT_COLOR: #8080806b;
-$BGC_GRAY:#e4e4e4;
-
+$BGC_GRAY: #e4e4e4;
 $BGC_CATEGORY_ITEM: red;
+$BGC_DELETED_ITEM: #ff000047;
 
-$BGC_DELETED_ITEM:#ff000047;
+$BORDER_INPUT_COLOR: #8080806b;
 
 $POPUP_TRANSITION: 500ms;
 
 @function convertToVw($fontSizePx) {
     @return ($fontSizePx / 375) * 100 + vw;
 }
+
 @function convertToPx($size) {
     @return $size / 375 * 568 + px;
+}
+
+
+@mixin VWandMediaPx($size, $selector) {
+    #{$selector}: convertToVw($size);
+    @media screen and (min-width: $MAX_WIDTH) {
+        #{$selector}: convertToPx($size);
+    }
 }
 
 @mixin container {
@@ -29,5 +36,11 @@ $POPUP_TRANSITION: 500ms;
     margin: 0 auto;
     @media screen and (min-width: $MAX_WIDTH) {
         width: convertToPx(375);
+    }
+}
+
+@mixin iconHoverColor($color) {
+    &:hover {
+        fill: $color;
     }
 }

@@ -18,7 +18,7 @@ const Categories: React.FC = () => {
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
     }, [])
-    
+
     return (
         <>
             {isCategoryWithSearch

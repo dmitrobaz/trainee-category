@@ -57,3 +57,16 @@
     transition: transform $POPUP_TRANSITION;
     transform: translateX(100%);
 }
+
+.category-transition-enter {
+    transition: 0.2s ease-in;
+    opacity: 1;
+}
+.category-transition-enter-active {
+}
+.category-transition-exit {
+    transition: 0.2s ease-in;
+    opacity: 0;
+}
+.category-transition-exit-active {
+}

@@ -65,6 +65,38 @@ export const cardConfig = [
     {
         name: 'Card_17',
         categoryId: [1, 4, 6]
+    },
+    {
+        name: 'Card_18',
+        categoryId: [7]
+    },
+    {
+        name: 'Card_19',
+        categoryId: [8]
+    },
+    {
+        name: 'Card_20',
+        categoryId: [8, 9]
+    },
+    {
+        name: 'Card_21',
+        categoryId: [9, 10]
+    },
+    {
+        name: 'Card_22',
+        categoryId: [10]
+    },
+    {
+        name: 'Card_23',
+        categoryId: [11]
+    },
+    {
+        name: 'Card_24',
+        categoryId: [7, 11]
+    },
+    {
+        name: 'Card_25',
+        categoryId: [11]
     }
 ]
 

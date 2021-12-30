@@ -7,6 +7,7 @@ import { GoPlus } from 'react-icons/go';
 
 import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 import { categoryAllSelected } from '../../store/actions/app/filter/categoryAllSelected';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 interface ICategoryItemsProps {
     categoryObj: {
@@ -26,6 +27,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, categ
 
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
 
+
     const isSelectedAllCards = selectedCards.length === 0 || selectedCards[0] === 0
 
     const addNewCategoryHandler = () => {
@@ -38,7 +40,7 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, categ
     }
 
     const selectAllCategoryHandler = () => {
-        dispatch(categoryAllSelected())
+        !isSelectedAllCards && dispatch(categoryAllSelected())
     }
 
     useEffect(() => {
@@ -47,26 +49,42 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, categ
 
     return (
         <ul className={className}>
-            {!isAdd
-                ? <button
-                    onClick={() => isEdit
-                        ? setIsAdd(!isAdd)
-                        : selectAllCategoryHandler()}
-                    className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''} `}>
-                    {isEdit ? <GoPlus /> : "All"}
-                </button>
-                : <AddNewCategory
-                    isAdd={isAdd}
-                    setIsAdd={setIsAdd}
-                    setConfig={setConfig}
-                />}
-            {categoryObj.map((item: any, key: number) => {
+            {<TransitionGroup component={null}>
+                {!isAdd
+                    ? <button
+                        onClick={() => isEdit
+                            ? setIsAdd(!isAdd)
+                            : selectAllCategoryHandler()}
+                        className={`popup-category-item popup-category-item-all ${isEdit || isSelectedAllCards ? 'background-green' : ''} `}>
+                        {isEdit ? <GoPlus /> : "All"}
+                    </button>
+                    : <AddNewCategory
+                        isAdd={isAdd}
+                        setIsAdd={setIsAdd}
+                        setConfig={setConfig}
+                        categoryObj={categoryObj}
+                    />}
+
+                {categoryObj.map((item: any) => {
+                    return (<CSSTransition
+                        key={item.id}
+                        classNames="category-transition"
+                        timeout={200}
+                    >
+                        <PopupCategoryItem
+                            key={item.id}
+                            categoryData={item}
+                        />
+                    </CSSTransition>)
+                })}
+            </TransitionGroup>}
+            {/* {categoryObj.map((item: any, key: number) => {
                 return (
                     <PopupCategoryItem
                         key={`${key + item.name}`}
                         categoryData={item}
                     />)
-            })}
+            })} */}
         </ul >
 
     );

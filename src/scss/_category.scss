@@ -59,12 +59,20 @@
         }
     }
     &-search {
+        position: relative;
         border: none;
         font-size: convertToVw(14);
         padding: convertToVw(5);
         @media screen and (min-width: $MAX_WIDTH) {
             padding: convertToPx(5);
             font-size: convertToPx(14);
+        }
+        &-clear {
+            background: none;
+            border: none;
+            @include VWandMediaPx(70, right);
+            @include VWandMediaPx(11, top);
+            position: absolute;
         }
     }
     &-add {

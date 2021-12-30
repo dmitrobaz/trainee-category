@@ -1,6 +1,12 @@
-export { interimDeleteCategory } from './interimDeleteCategory';
 export { interimNewCategory } from './interimNewCategory';
-export { interimClearCategory } from './interimClearCategory';
+export { interimRemoveNewCategory } from './interimRemoveNewCategory';
+
+export { interimDeleteCategory } from './interimDeleteCategory';
+export { interimRemoveDeletedCategory } from './interimRemoveDeletedCategory';
+
+export { interimRenamedCategory } from './interimRenamedCategory';
+export { interimRemoveRenamedCategory } from './interimRemoveRenamedCategory';
+
 
 
 

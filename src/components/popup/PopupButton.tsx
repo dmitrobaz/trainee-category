@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Popup from './Popup';
 
-import { interimClearCategory, removeCategory, togglePopup } from '../../store/actions/app';
+import { interimRemoveDeletedCategory, removeCategory, togglePopup } from '../../store/actions/app';
 
 import { GiHamburgerMenu } from "react-icons/gi"
 
@@ -29,7 +29,7 @@ const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
           deletedItems.forEach((id: number) => {
             return dispatch(removeCategory(id))
           })
-          dispatch(interimClearCategory())
+          dispatch(interimRemoveDeletedCategory())
         }
       }, 500)
     }

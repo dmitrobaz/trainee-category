@@ -1,0 +1,17 @@
+@import "./vars";
+
+
+
+.icon {
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
+.edit-icon {
+    fill: #3f3f3f69;
+    @include iconHoverColor(#3f3f3fc5);
+}
+.delete-icon {
+    fill: #ff000069;
+    @include iconHoverColor(#ff0000b7);
+}

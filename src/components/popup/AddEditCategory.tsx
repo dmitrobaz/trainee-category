@@ -14,18 +14,6 @@ const AddEditCategory: React.FC = () => {
 
     const isEdit = useSelector(({ app }: any) => app.states.isEditCategory)
 
-    const bounced = (func: any, timer: any) => {
-        let timeId: any = null;
-        return (...args: any) => {
-            if (timeId) {
-                clearTimeout(timeId);
-            }
-            timeId = setTimeout(() => {
-                func(...args);
-            }, timer);
-        };
-    };
-
     const onChangeHandler = (e: any) => {
         setInputValue(e.target.value)
     }
