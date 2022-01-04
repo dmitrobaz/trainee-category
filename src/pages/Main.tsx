@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Categories, Header, CardColumns, HeaderDescription } from '../components';
+import { Categories, Header, CardColumns, MainDescription } from '../components';
 
 import { setDefaultCategory } from "../store/actions/app/config/setDefaultCategory";
 
@@ -23,7 +23,7 @@ const Main = () => {
         <>
             <Header />
             <main className="main">
-                <HeaderDescription />
+                <MainDescription />
                 <Categories />
                 <CardColumns />
             </main>

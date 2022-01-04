@@ -6,66 +6,15 @@
 @import "./trasition-group";
 @import "./icon";
 
-
-
-
-
-.test {
-    background: red;
-    transition: 0.2s ease-in;
-    opacity: 1;
+html {
+    background: $BGC_MAIN;
 }
 
-.background-red {
-    // transition: 0.2s ease-in;
-    background: $BGC_DELETED_ITEM;
+#root {
+    max-width: 568px;
+    background: cadetblue;
 }
 
-.fixed-popup-btn {
-    position: fixed;
-    display: flex;
-    top: 143px;
-    z-index: 13;
-    /* width: 90.13333vw; */
-    right: 7px;
-}
-
-.category-wrapper-slide-from-top {
-    position: absolute;
-    left: 0;
-}
-.category-section-wrapper-copy {
-    display: flex;
-    flex-direction: column;
-}
-
-.button-popup {
-    display: flex;
-    position: absolute;
-    top: 145px;
-    right: 8px;
-    &-fixed {
-        position: fixed;
-        display: flex;
-        z-index: 13;
-        transform: translateX(100px);
-        top: 145px;
-        right: 8px;
-        &.entering {
-            opacity: 0;
-        }
-        &.entered {
-            opacity: 1;
-            transform: translateX(0px);
-        }
-        &.exiting {
-            opacity: 0;
-        }
-        &.exited {
-            opacity: 0;
-        }
-    }
-}
 * {
     padding: 0;
     margin: 0;
@@ -86,11 +35,6 @@ a {
     :hover {
         background: rgba(0, 0, 0, 0.144);
     }
-}
-
-#root {
-    max-width: 568px;
-    background: cadetblue;
 }
 
 .overflow-x-enable {
@@ -121,34 +65,23 @@ body {
 }
 
 .main {
-    @include container;
     flex-direction: column;
     background: $BGC_MAIN;
     position: relative;
-    top: convertToVw(100);
-    @media screen and (min-width: $MAX_WIDTH) {
-        top: convertToPx(100);
-    }
-    &-top {
+    @include container;
+    @include VWandMediaPx(100, top);
+    &-description {
         padding: 0 convertToVw(15) convertToVw(15) convertToVw(15);
         background: cadetblue;
-
-        &-descr {
-            font-size: convertToVw(15);
-            @media screen and (min-width: $MAX_WIDTH) {
-                font-size: convertToPx(15);
-            }
-        }
-
-        &-title {
-            font-weight: bold;
-            font-size: convertToVw(20);
-            @media screen and (min-width: $MAX_WIDTH) {
-                font-size: convertToPx(20);
-            }
-        }
         @media screen and (min-width: $MAX_WIDTH) {
             padding: 0 convertToPx(15) convertToPx(15) convertToPx(15);
+        }
+        &-text {
+            @include VWandMediaPx(15, font-size);
+        }
+        &-title {
+            font-weight: bold;
+            @include VWandMediaPx(20, font-size);
         }
     }
 
@@ -156,7 +89,7 @@ body {
         position: fixed;
         content: "";
         width: 100vw;
-        height: convertToVw(25);
+        @include VWandMediaPx(25, height);
         bottom: 0;
         z-index: 2;
         background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #f3f3f3 100%);

@@ -4,9 +4,6 @@
     transition: 0.2s ease-in;
     transform: translateY(0);
 
-    &-margint {
-        transform: translateY(100px);
-    }
     width: convertToVw(375);
     @media screen and (min-width: $MAX_WIDTH) {
         width: convertToPx(375);

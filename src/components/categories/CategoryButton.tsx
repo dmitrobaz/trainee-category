@@ -5,10 +5,9 @@ interface ICategoryButtonProps {
     categoryHandler: any,
     categoryData: any,
     categoryToggle: any,
-    tempCategoryData: any
 }
 
-const CategoryButton: React.FC<ICategoryButtonProps> = ({ isEdit, categoryHandler, categoryData, categoryToggle, tempCategoryData }) => {
+const CategoryButton: React.FC<ICategoryButtonProps> = ({ isEdit, categoryHandler, categoryData, categoryToggle }) => {
     return (
         <button
             onClick={() => !isEdit && categoryHandler(categoryData.id)}

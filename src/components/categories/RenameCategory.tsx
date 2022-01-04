@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoCheck, GoX } from 'react-icons/go';
 import { renameCategory, toggleRenameCategory } from '../../store/actions/app';
 import { interimRenamedCategory } from '../../store/actions/app/interim/interimRenamedCategory';
+import { MdClear } from 'react-icons/md';
 
 interface IRenameCategoryProps {
     isEditCategoryItem: boolean,
@@ -18,14 +19,11 @@ interface IRenameCategoryProps {
 }
 
 const RenameCategory: React.FC<IRenameCategoryProps> = ({ placeholder, setIsEditCategoryItem, isEditCategoryItem, setIsVisibleBtn, isVisibleBtn, setTempCategoryData, tempCategoryData }) => {
-    const dispatch = useDispatch()
-
     const [inputValue, setInputValue] = useState<string>('')
-
-    const isRenameCategory = useSelector(({ app }: any) => app.states.isRenameCategory)
-    const isSaveCategory = useSelector(({ app }: any) => app.states.isSaveCategory)
+    const [visibleClear, setVisibleClear] = useState<boolean>(false)
 
 
+    const dispatch = useDispatch()
 
     const RenameCategoryHandler = () => {
         inputValue && setTempCategoryData({ id: tempCategoryData.id, name: inputValue })
@@ -42,16 +40,23 @@ const RenameCategory: React.FC<IRenameCategoryProps> = ({ placeholder, setIsEdit
 
     const onChangeHandler = (e: any) => {
         setInputValue(e.target.value)
+        !visibleClear && setVisibleClear(true)
+
     }
 
+    useEffect(() => {
+        inputValue === '' && setVisibleClear(false)
+    }, [inputValue])
     return (
-        <div>
+        <div className="popup-add-wrapper">
             <input
                 className='popup-add-input'
                 placeholder={placeholder}
                 type="text"
                 value={inputValue}
                 onChange={(e: any) => onChangeHandler(e)} />
+            {visibleClear && <button className='popup-add-input-clear' onClick={() => setInputValue('')}><MdClear /></button>}
+
             <button
                 className='category-button'
                 onClick={() => RenameCategoryHandler()}>

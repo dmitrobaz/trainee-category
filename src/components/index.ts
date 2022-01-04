@@ -1,6 +1,6 @@
 export { default as Header } from './header/Header';
-export { default as HeaderDescription } from './header/HeaderDescription';
 
+export { default as MainDescription } from './header/MainDescription';
 
 export { default as Categories } from './categories/Categories';
 export { default as CategoryItems } from './categories/CategoryItems';
@@ -8,7 +8,6 @@ export { default as SearchCategory } from './categories/SearchCategory';
 export { default as AddNewCategory } from './categories/AddNewCategory';
 export { default as RenameCategory } from './categories/RenameCategory';
 export { default as CategoryButton } from './categories/CategoryButton';
-
 
 export { default as PopupButton } from './popup/PopupButton';
 export { default as Popup } from './popup/Popup';

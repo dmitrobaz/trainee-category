@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { toggleEditCategory, toggleSaveCategory, addNewCategory } from '../../store/actions/app';
+import { toggleEditCategory, toggleSaveCategory, addNewCategory, toggleRenameCategory, categoryAllSelected } from '../../store/actions/app';
 
 import { AiFillEdit } from 'react-icons/ai';
 import { GoCheck, GoX } from 'react-icons/go';
@@ -13,6 +13,10 @@ const AddEditCategory: React.FC = () => {
     const dispatch = useDispatch()
 
     const isEdit = useSelector(({ app }: any) => app.states.isEditCategory)
+    const isRenameCategory = useSelector(({ app }: any) => app.states.isRenameCategory)
+    const selectedCards = useSelector(({ app }: any) => app.filter.category)
+
+    const isSelectedAllCards = selectedCards.length === 0 || selectedCards[0] === 0
 
     const onChangeHandler = (e: any) => {
         setInputValue(e.target.value)
@@ -26,6 +30,9 @@ const AddEditCategory: React.FC = () => {
     const editToggleHandler = (state: boolean = false) => {
         dispatch(toggleEditCategory())
         dispatch(toggleSaveCategory(state))
+        !isSelectedAllCards && dispatch(categoryAllSelected())
+        isRenameCategory && dispatch(toggleRenameCategory())
+
     }
 
     return (

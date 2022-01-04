@@ -3,11 +3,15 @@
 .popup-display-flex {
     display: flex;
 }
-.no-margin {
-    margin: 0;
-}
 .background-green {
     background: $BGC_GREEN_HOVER !important;
+}
+
+.button-popup {
+    display: flex;
+    position: absolute;
+    @include VWandMediaPx(145, top);
+    @include VWandMediaPx(8, right);
 }
 
 .popup {
@@ -21,23 +25,19 @@
             position: relative;
         }
         &-input {
-            font-size: convertToVw(14);
-            padding: convertToVw(5);
-            width: convertToVw(140);
-            margin-left: convertToVw(5);
+            @include VWandMediaPx(14, font-size);
+            @include VWandMediaPx(5, padding);
+            @include VWandMediaPx(140, width);
+            @include VWandMediaPx(5, margin-left);
             border: none;
             background: $BGC_GRAY;
-            @media screen and (min-width: $MAX_WIDTH) {
-                padding: convertToPx(5);
-                font-size: convertToPx(14);
-                width: convertToPx(140);
-                margin-left: convertToPx(5);
-            }
+            text-align: center;
             &-clear {
-                background: none;
-                border: none;
+                @include VWandMediaPx(14, font-size);
                 @include VWandMediaPx(77, right);
                 @include VWandMediaPx(6, top);
+                background: none;
+                border: none;
                 position: absolute;
             }
         }
@@ -46,11 +46,14 @@
     &-category-item {
         border: none;
         padding: convertToVw(5) convertToVw(15);
-        font-size: convertToVw(15);
+        @include VWandMediaPx(15, font-size);
+        @include VWandMediaPx(5, margin);
         background: $BGC_GRAY;
-        margin: convertToVw(5);
         transition: 0.2s ease-in;
         cursor: pointer;
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: convertToPx(5) convertToPx(15);
+        }
         &-all {
             @include VWandMediaPx(50, width);
         }
@@ -78,28 +81,19 @@
         &:hover {
             background: #5f9ea093;
         }
-        @media screen and (min-width: $MAX_WIDTH) {
-            font-size: convertToPx(15);
-            padding: convertToPx(5) convertToPx(15);
-            margin: convertToPx(5);
-        }
     }
     &-button {
         display: flex;
         position: absolute;
-        top: convertToVw(151);
-        right: convertToVw(9);
+        @include VWandMediaPx(151, top);
+        @include VWandMediaPx(9, right);
     }
     &-wrapper {
         position: fixed;
-        // width: 100vw;
         height: 100vh;
         background: white;
         z-index: 9999;
-        width: convertToVw(375);
-        @media screen and (min-width: $MAX_WIDTH) {
-            width: convertToPx(375);
-        }
+        @include VWandMediaPx(375, width);
     }
     &-header {
         display: flex;
@@ -111,17 +105,13 @@
         font-weight: bold;
         color: white;
         align-items: center;
-        height: convertToVw(50);
+        @include VWandMediaPx(50, height);
     }
     &-title {
         width: 100%;
         margin: 0;
-        font-size: convertToVw(18);
-        padding-left: convertToVw(20);
-        @media screen and (min-width: $MAX_WIDTH) {
-            font-size: convertToPx(18);
-            padding-left: convertToPx(20);
-        }
+        @include VWandMediaPx(18, font-size);
+        @include VWandMediaPx(20, padding-left);
         color: black;
         text-transform: uppercase;
     }
@@ -131,18 +121,10 @@
         justify-content: center;
         background: none;
         border: none;
-        padding-left: convertToVw(20);
-        @media screen and (min-width: $MAX_WIDTH) {
-            padding-left: convertToPx(20);
-        }
+        @include VWandMediaPx(20, padding-left);
+        @include VWandMediaPx(20, font-size);
         cursor: pointer;
         svg {
-            width: convertToVw(20);
-            height: convertToVw(20);
-            @media screen and (min-width: $MAX_WIDTH) {
-                width: convertToPx(20);
-                height: convertToPx(20);
-            }
             fill: black;
         }
     }
@@ -151,20 +133,23 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        @media screen and (min-width: $MAX_WIDTH) {
+            padding: convertToPx(10) convertToPx(20);
+        }
         &::after {
             background-color: #ededed;
             position: absolute;
-            width: convertToVw(375);
             top: 0px;
-            height: convertToVw(62);
             display: block;
             content: "";
             left: 0;
             z-index: -1;
+            @include VWandMediaPx(375, width);
+            @include VWandMediaPx(62, height);
         }
         &-title {
-            font-size: convertToVw(18);
-            padding: convertToVw(10);
+            @include VWandMediaPx(18, font-size);
+            @include VWandMediaPx(10, padding);
         }
         &-items {
             &-edit {
@@ -174,112 +159,14 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    margin-top: convertToVw(10);
+                    @include VWandMediaPx(10, margin-top);
                 }
             }
             &-wrapper {
                 display: flex;
-                margin-top: convertToVw(20);
+                @include VWandMediaPx(20, margin-top);
                 flex-wrap: wrap;
                 align-items: baseline;
-            }
-        }
-    }
-}
-@media screen and (min-width: $MAX_WIDTH) {
-    .popup {
-        position: absolute;
-        top: 0;
-        z-index: 10;
-        width: 100vw;
-        background: white;
-        &-button {
-            top: convertToPx(151);
-            right: convertToPX(9);
-        }
-        &-wrapper {
-            position: fixed;
-            // width: 100vw;
-            height: 100vh;
-            background: white;
-            z-index: 9999;
-            width: convertToPx(375);
-            @media screen and (min-width: $MAX_WIDTH) {
-                width: convertToPx(375);
-            }
-        }
-        &-header {
-            display: flex;
-            background: cadetblue;
-            font-size: 0.6875rem;
-            line-height: 1.2;
-            letter-spacing: 0.1rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: white;
-            align-items: center;
-            height: convertToPx(50);
-        }
-        &-title {
-            width: 100%;
-            margin: 0;
-            font-size: convertToPx(18);
-            padding-left: convertToPx(20);
-            @media screen and (min-width: $MAX_WIDTH) {
-                font-size: convertToPx(18);
-                padding-left: convertToPx(20);
-            }
-            color: black;
-            text-transform: uppercase;
-        }
-        &-back {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: none;
-            border: none;
-            padding-left: convertToPx(20);
-            @media screen and (min-width: $MAX_WIDTH) {
-                padding-left: convertToPx(20);
-            }
-            cursor: pointer;
-            svg {
-                width: convertToPx(20);
-                height: convertToPx(20);
-                @media screen and (min-width: $MAX_WIDTH) {
-                    width: convertToPx(20);
-                    height: convertToPx(20);
-                }
-                fill: black;
-            }
-        }
-        &-section {
-            padding: convertToPx(10) convertToPx(20);
-            &::after {
-                height: convertToPx(62);
-                width: convertToPx(375);
-            }
-            &-title {
-                background-color: #ededed;
-                font-size: convertToPx(18);
-                padding: convertToPx(10);
-            }
-            &-items {
-                &-edit {
-                    flex-direction: column;
-                    &-wrapper {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-top: convertToPx(10);
-                    }
-                }
-                &-wrapper {
-                    display: flex;
-                    margin-top: convertToPx(20);
-                    flex-wrap: wrap;
-                }
             }
         }
     }

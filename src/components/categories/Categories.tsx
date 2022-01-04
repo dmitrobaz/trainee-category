@@ -11,7 +11,7 @@ const Categories: React.FC = () => {
     const isCategoryWithSearch = categoryObj.length > 10
 
     const scrollHandler = () => {
-        const heightMainTop = document.querySelector<HTMLElement>('.main-top')?.offsetHeight || 100
+        const heightMainTop = document.querySelector<HTMLElement>('.main-description')?.offsetHeight || 100
         window.scrollY > heightMainTop ? setScrollView(true) : setScrollView(false)
     }
 

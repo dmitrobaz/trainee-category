@@ -37,7 +37,7 @@ const PopupButton: React.FC<IPopupButtonProps> = ({ className }) => {
 
   return (
     <>
-      <button className={`category-button ${className && className}`} type="button" onClick={() => dispatch(togglePopup())}>
+      <button className={`category-button ${className ? className : ''}`} type="button" onClick={() => dispatch(togglePopup())}>
         <GiHamburgerMenu />
       </button>
       <CSSTransition

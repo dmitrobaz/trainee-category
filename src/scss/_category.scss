@@ -63,6 +63,7 @@
         border: none;
         font-size: convertToVw(14);
         padding: convertToVw(5);
+        @include VWandMediaPx(300, min-width);
         @media screen and (min-width: $MAX_WIDTH) {
             padding: convertToPx(5);
             font-size: convertToPx(14);
@@ -70,7 +71,8 @@
         &-clear {
             background: none;
             border: none;
-            @include VWandMediaPx(70, right);
+            @include VWandMediaPx(15, font-size);
+            @include VWandMediaPx(15, right);
             @include VWandMediaPx(11, top);
             position: absolute;
         }
@@ -101,7 +103,7 @@
         display: flex;
         justify-content: space-between;
         width: convertToVw(375);
-        padding: convertToVw(3) convertToVw(5) 0 0;
+        padding: convertToVw(5) convertToVw(18) convertToVw(3) convertToVw(13);
         font-size: convertToVw(12);
         align-items: baseline;
 
@@ -109,7 +111,7 @@
         background: $BGC_MAIN;
         @media screen and (min-width: $MAX_WIDTH) {
             width: convertToPx(375);
-            padding: convertToPx(3) convertToPx(5) 0 0;
+            padding: convertToPx(5) convertToPx(18) convertToPx(3) convertToPx(13);
             font-size: convertToPx(12);
             top: convertToPx(100);
         }
@@ -119,7 +121,7 @@
             display: flex;
             justify-content: space-between;
             width: convertToVw(375);
-            padding: convertToVw(3) convertToVw(5) 0 0;
+            padding: convertToVw(5) convertToVw(18) convertToVw(3) convertToVw(13);
             font-size: convertToVw(12);
             align-items: baseline;
             transition: 0.1s ease-in;
@@ -127,7 +129,7 @@
             box-shadow: 0px 3.2vw 2.66667vw #0000001f;
             @media screen and (min-width: $MAX_WIDTH) {
                 width: convertToPx(375);
-                padding: convertToPx(3) convertToPx(5) 0 0;
+                padding: convertToPx(5) convertToPx(18) convertToPx(3) convertToPx(13);
                 font-size: convertToPx(12);
                 top: convertToPx(100);
                 box-shadow: 0px 3.2vw 2.66667vw #0000001f;

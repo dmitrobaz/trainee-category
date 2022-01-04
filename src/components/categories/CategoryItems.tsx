@@ -8,6 +8,7 @@ import { GoPlus } from 'react-icons/go';
 import { addNewCategory } from '../../store/actions/app/config/addNewCategory';
 import { categoryAllSelected } from '../../store/actions/app/filter/categoryAllSelected';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import StackGrid from 'react-stack-grid';
 
 interface ICategoryItemsProps {
     categoryObj: {
@@ -26,7 +27,6 @@ const CategoryItems: React.FC<ICategoryItemsProps> = ({ isEdit, className, categ
     const dispatch = useDispatch()
 
     const selectedCards = useSelector(({ app }: any) => app.filter.category)
-
 
     const isSelectedAllCards = selectedCards.length === 0 || selectedCards[0] === 0
 
